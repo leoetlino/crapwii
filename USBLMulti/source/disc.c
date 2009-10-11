@@ -5,6 +5,7 @@
 #include <ogcsys.h>
 #include <ogc/lwp_watchdog.h>
 
+#include "config.h"
 #include "apploader.h"
 #include "disc.h"
 #include "subsystem.h"
@@ -222,7 +223,7 @@ s32 Disc_IsWii(void)
 	return 0;
 }
 
-s32 Disc_BootPartition(bool verboseLog, bool ocarinaSelection, int fix, u64 offset)
+s32 Disc_BootPartition(LoaderConfig loaderConfig , u64 offset)
 {
 	entry_point p_entry;
 
@@ -234,7 +235,7 @@ s32 Disc_BootPartition(bool verboseLog, bool ocarinaSelection, int fix, u64 offs
 		return ret;
 
 	/* Run apploader */
-	ret = Apploader_Run(ocarinaSelection, fix, &p_entry);
+	ret = Apploader_Run(loaderConfig, &p_entry);
 	if (ret < 0)
 		return ret;
 
@@ -248,12 +249,12 @@ s32 Disc_BootPartition(bool verboseLog, bool ocarinaSelection, int fix, u64 offs
 	__Disc_SetTime();
 	
 	/* OCARINA STUFF - FISHEARS*/
-	if (ocarinaSelection) //(ocarinaChoice)
+	if (loaderConfig.ocarinaSelection) //(ocarinaChoice)
 	{
-		if (verboseLog) printf("Doing sd codes\n");
+		if (loaderConfig.verboseLog) printf("Doing sd codes\n");
 		memset(gameid, 0, 8);
 		memcpy(gameid, (char*)0x80000000, 6);
-		do_sd_code(verboseLog,  gameid);
+		do_sd_code(loaderConfig.verboseLog,  gameid);
 	}
 
 	/* Close subsystems */
@@ -271,7 +272,7 @@ s32 Disc_BootPartition(bool verboseLog, bool ocarinaSelection, int fix, u64 offs
 	return 0;
 }
 
-s32 Disc_WiiBoot(bool verboseLog, bool ocarinaSelection, int fix)
+s32 Disc_WiiBoot(LoaderConfig loaderConfig)
 {
 	u64 offset;
 	s32 ret;
@@ -282,5 +283,5 @@ s32 Disc_WiiBoot(bool verboseLog, bool ocarinaSelection, int fix)
 		return ret;
 
 	/* Boot partition */
-	return Disc_BootPartition(verboseLog, ocarinaSelection, fix, offset);
+	return Disc_BootPartition(loaderConfig, offset);
 }

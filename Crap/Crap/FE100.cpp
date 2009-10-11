@@ -14,6 +14,7 @@ using namespace FE100;
 using namespace System;
 using namespace System::Reflection;
 using namespace System::Security::Policy;
+using namespace System::Configuration;
 //using namespace libconfig;
 
 [STAThreadAttribute]
@@ -40,7 +41,6 @@ int main(array<System::String ^> ^args)
    Console::WriteLine( "child domain: {0}", domain->FriendlyName );
    Console::WriteLine();
    Console::WriteLine( "Application Base Directory is: {0}", domain->BaseDirectory );
-
 	// Create the main window and run it
 	Application::Run(gcnew Form1(domain));
 	return 0;

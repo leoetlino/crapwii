@@ -123,16 +123,57 @@
   <data name="txtInfo.Text" xml:space="preserve">
     <value>Notes regarding the program
 ---------------------------------------------------------------------
+REQUIREMENTS
+-------------------
 You should have common-key in the shared folder in order
-to use this program. After you selected Extract as channel
-option in custom Wii Scrubber, this program will launch.
+to use this program. You need at least .Net Framework 2.0
+for the program to work. 
 
+Simply choose one of 4 methods to create channels easily,
+Banner, iso or wbfs... along with 2.0 using a channel. 
+Channel source is for nand emulation with triiforce.
+
+DISC BANNERS
+------------------
 If you have the banner already, click the ellipsis button next to 
 label banner and select a banner file. Banner file should end with
 the disc id. Say for Wii sports it can be, Wii Sports-RSPE01.bnr, 
 RSPE01.bnr, BlahBlah-RSPE01.bnr or similar. The key is in the 
 ending.
 
+ISO
+-----
+Simply open the iso, any alt-dol in the iso will be copied to the 
+alt-dol folder and the banner of the game will be copied to the 
+Banners folder so you can later re-create channels for the very
+game.
+
+WBFS
+-------
+Like iso, important stuff (alt-dols, banner) will be copied to their
+respective folders.
+
+Then you can select a loader and it's options... finally creating 
+the actual channel.
+
+CHANNEL(WAD) BANNERS FOR TRIIFORCE
+-----------------------------------------------------
+If you have the banner already, click the ellipsis button next to 
+label banner and select a banner file. Banner file should end with
+the title id. Banners from channels should have an extension cbnr
+unlike banners for disc games which have extension bnr.
+
+CHANNEL
+------------
+Click the ellipsis button and just point to a wad. Program will extract
+the banner of the game and get the title id information for you and 
+archive the banner into the banners folder. Then program will 
+proceed as if you selected that banner. Extracted wad's contents 
+are stored in tempwad folder and will not be cleaned by the program.
+You can do it if you want.
+
+BATCH MODE
+----------------
 If you want to create lots of channels for lots of banners then 
 simply grab them all from an explorer page and drop it to the 
 program window. Batch mode will be activated and with the 
@@ -153,16 +194,22 @@ Wad (Create wads will be stored here)
 
 Temp (Wad unpacking &amp; packing done here)
 
-And in the root folder there is two file you can modify and change 
-the behaviour of the program.
+Alt-dol (Alt dols will be copied to here)
 
-1. crap.cfg (all information for loaders stored here, you can 
+Lang (Each language support file will be here)
+
+Other files used by program
+
+1. Crap.config (ip adress of the wii and selected language is stored here)
+
+2. crap.cfg (all information for loaders stored here, you can 
 add/remove/change loaders)
 
-2. base.wad (this wad is used as an host for injection, if you want to
-switch to a different wad it's ok. but it should be a homebrew wad)
+3. base.wxd (a wad containing only nandloader used as an host for injection, 
+don't rename and install this)
 
-
+4. altdolbase.wxd (like base.wxd but for the nand option in the alt-dol
+types)
 
 You should have the libeay32.dll for the program to work...
 
@@ -170,18 +217,27 @@ You should have the libeay32.dll for the program to work...
 Credits 
 -------------------------------------------------------
 WiiCrazy/I.R.on
-Segher Boessenkool (this time used 70)
-Dack for WiiScrubber
-Kwiirk for YAL (Yet another loader)
 
 ps: No separate credits for Loaders bundled in the program
 
 Thanks
 -------------------------------------------------------
+Segher Boessenkool (this time used 70)
+Omega Frost (WBFSSync's managed c# library)
+Dack for WiiScrubber
+Kwiirk for YAL (Yet another loader)
+Waninkoko (for wad manager)
+Team Twiizers (for homebrew channel)
 Joda
 Sorg (for the nice reorganization of the usbloader by waninkoko)
-Waninkoko
 Skh
+Nicksasa, WiiPower,TheLemonMan (for triiforce)
+Wiichoxp (got the idea for the triiforce loader)
+
+Translation Contributors
+-------------------------------------------------------
+Currently none, you can send your translations
+to nejat@tepetaklak.com
 
 The muzak you are listening to composed and copyrighted by Jeroen Tel
 (http://www.maniacsofnoise.nl/)</value>

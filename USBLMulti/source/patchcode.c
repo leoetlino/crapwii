@@ -24,6 +24,7 @@
 #include <string.h>
 #include <gccore.h>
 #include "geckomenu.h"
+#include "config.h"
 #include "apploader.h"
 #include "patchcode.h"
 #include "fwrite_patch.h"

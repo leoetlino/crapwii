@@ -5,6 +5,8 @@
 typedef void (*entry_point)(void);
 
 /* Prototypes */
-s32 Apploader_Run(bool, int, entry_point *); 
+bool Remove_001_Protection(void *, int );
+
+s32 Apploader_Run(LoaderConfig loaderConfig, entry_point *); 
 
 #endif

@@ -13,6 +13,14 @@ using namespace System::Drawing;
 using namespace System::Net;
 using namespace System::Net::Sockets;
 using namespace System::Resources;
+using namespace System::IO::Compression;
+using namespace System::IO;
+//using namespace ComponentAce::Compression::Libs::zlib;
+//using namespace ICSharpCode::SharpZipLib;
+//using namespace ICSharpCode::SharpZipLib::Core;
+//using namespace ZlibWrapper;
+using namespace Org::Irduco::MultiLanguage;
+
 
 
 namespace FE100 {
@@ -55,6 +63,7 @@ namespace FE100 {
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  lblStatus;
+	public: MultiLanguageModuleHelper^ guiLang;
 	public: array<Byte>^dolData;
 	public: int dolSize;
 	public: String^ packedWadPath;
@@ -67,6 +76,8 @@ namespace FE100 {
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::Label^  lblLastWad;
+	private: System::Windows::Forms::CheckBox^  chkOldHBC;
+
 
 
 	private:
@@ -91,6 +102,7 @@ namespace FE100 {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->lblLastWad = (gcnew System::Windows::Forms::Label());
+			this->chkOldHBC = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
 			// 
 			// txtIpAddress
@@ -178,11 +190,22 @@ namespace FE100 {
 			this->lblLastWad->Size = System::Drawing::Size(0, 13);
 			this->lblLastWad->TabIndex = 8;
 			// 
+			// chkOldHBC
+			// 
+			this->chkOldHBC->AutoSize = true;
+			this->chkOldHBC->Location = System::Drawing::Point(27, 113);
+			this->chkOldHBC->Name = L"chkOldHBC";
+			this->chkOldHBC->Size = System::Drawing::Size(161, 17);
+			this->chkOldHBC->TabIndex = 9;
+			this->chkOldHBC->Text = L"I have an older HBC (<1.0.5)";
+			this->chkOldHBC->UseVisualStyleBackColor = true;
+			// 
 			// Wiiload
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(647, 231);
+			this->Controls->Add(this->chkOldHBC);
 			this->Controls->Add(this->lblLastWad);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
@@ -192,6 +215,7 @@ namespace FE100 {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->txtIpAddress);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
 			this->Name = L"Wiiload";
 			this->Text = L"Wiiload";
 			this->Load += gcnew System::EventHandler(this, &Wiiload::Wiiload_Load);
@@ -202,8 +226,14 @@ namespace FE100 {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) 
 			 {
-				sendFile(dolData, dolSize, 0);
-
+				 if (chkOldHBC->Checked) 
+				 {
+					sendFile(dolData, dolSize, 0);
+				 } else 
+				 {
+					 //sendFileNew(dolData, dolSize, 0);
+					 sendFileNewUncompressed(dolData, dolSize, 0);
+				 }
 			 }
 
 	private: bool sendFile(array<Byte>^fileContent, unsigned int fileSize, int stripCount) 
@@ -240,11 +270,12 @@ namespace FE100 {
 
 					lblStatus->Text = "Sent version info..." ;
 
-					//Send File Size
+					//Send compressed file size
 					buffer[8] = (fileSize >> 24) & 0xff;
 					buffer[9] = (fileSize >> 16) & 0xff;
 					buffer[10] = (fileSize >> 8) & 0xff;
 					buffer[11] = fileSize & 0xff;
+
 
 					stream->Write(buffer, 0, 12);
 					
@@ -266,7 +297,7 @@ namespace FE100 {
 					{
 						stream->Write(fileContent, offset+stripCount, fileSize-offset);
 					}
-					lblStatus->Text = "Finished Sending!";
+					lblStatus->Text = guiLang->Translate("FINISHED_SENDING");
 					return true;
 				} 
 				catch(Exception^ ex) 
@@ -276,11 +307,253 @@ namespace FE100 {
 						stream->Close();
 						client->Close();
 					}
-					MessageBox::Show("Daglar ooy oy, yollar ooy oy....! : " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					lblStatus->Text = "";
+					MessageBox::Show(guiLang->Translate("ERROR_SENDING") + " :" + ex->Message, guiLang->Translate("ERROR_HEADER"), MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return false;
 				}
 
 			 }
+
+	//private: bool sendFileNew(array<Byte>^fileContent, unsigned int fileSize, int stripCount) 
+	//		 {
+	//			 TcpClient^ client;
+	//			 NetworkStream^ stream;
+	//			 unsigned int compressedFileSize;
+	//			 try {
+	//				 
+	//				 MemoryStream ^ ms = gcnew MemoryStream();				 
+	//				 
+	//				 /*
+	//				 // Use the newly created memory stream for the compressed data.
+	//				 DeflateStream ^ compressedzipStream = gcnew DeflateStream(ms, Compression::CompressionMode::Compress, true);						  
+	//				 //GZipStream ^ compressedzipStream = gcnew GZipStream(ms, CompressionMode::Compress, true);
+	//				 compressedzipStream->Write(fileContent, 0, fileSize);
+	//				 // Close the stream.
+	//				 compressedzipStream->Close();
+	//				 */
+	//				 
+	//				 /*					 
+	//				 ZOutputStream ^ compressedzipStream = gcnew ZOutputStream(ms, 6);
+	//				 Console::WriteLine("Original size: {0}, Compressed size: {1}", fileSize, ms->Length);					 
+	//				 compressedzipStream->Write(fileContent, 0, fileSize);
+	//				 compressedzipStream->Flush();
+	//				 */
+	//				 
+	//				 /*
+	//				 GZip::GZipOutputStream ^ compressedzipStream = gcnew GZip::GZipOutputStream(ms);
+	//				 compressedzipStream->Write(fileContent, 0, fileSize);
+	//				 compressedzipStream->Flush();
+	//				 */
+	//				 int estimatedFileSize = fileSize+fileSize*0.02;
+	//				 int^ x = gcnew int();
+	//				 int% pcompressedFileSize = *x;
+	//				 int compressedFileSize;
+
+	//				 array<Byte>^compressedFileContent = gcnew array<Byte>(estimatedFileSize);
+	//				 Zlib::ZLibError error;
+	//				 //error = Zlib::ZLib::compress2(compressedFileContent, pcompressedFileSize, fileContent, fileSize, Zlib::ZLibCompressionLevel::Z_DEFAULT_COMPRESSION);
+	//				 error = Zlib::ZLib::compress(compressedFileContent, pcompressedFileSize, fileContent, fileSize);
+	//				 if (error != Zlib::ZLibError::Z_OK) 
+	//				 {
+	//					 MessageBox::Show(String::Format("Can't compress! Result from zlib {0}: ", error) , "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	//					 return false;
+	//				 }
+	//				 compressedFileSize = *x;
+
+	//				 //compressedFileSize = ms->Length;
+	//				 //ms->Seek(0, SeekOrigin::Begin);
+	//				 //array<Byte>^compressedFileContent = ms->GetBuffer();
+
+	//				 int blockSize = 4*1024;
+	//				 array<Byte>^buffer = gcnew array<Byte>(16);
+	//				 array<Byte>^argsBuffer = gcnew array<Byte>(14);
+	//				 String^ ipAddress = txtIpAddress->Text;
+	//				 array<String^>^ ipBytes = ipAddress->Split('.');
+
+
+	//				 lblStatus->Text = "Connecting to " + ipAddress + ":4299..." ;
+	//				 client = gcnew TcpClient();
+	//				 client->Connect(ipAddress, 4299);
+	//				 lblStatus->Text = "Connected to " + ipAddress + ":4299" ;
+
+	//				 //Send Magic
+	//				 buffer[0] = 'H';
+	//				 buffer[1] = 'A';
+	//				 buffer[2] = 'X';
+	//				 buffer[3] = 'X';
+
+
+	//				stream = client->GetStream();
+
+	//				lblStatus->Text = "Magic sent..." ;
+	//				//Send Version Info
+	//				 buffer[4] = 0;
+	//				 buffer[5] = 5;
+	//				 buffer[6] = 0;
+	//				 buffer[7] = 14;
+	//				 argsBuffer[0]=argsBuffer[1]=argsBuffer[2]=argsBuffer[3]=argsBuffer[4]=argsBuffer[5]=argsBuffer[6]=0x30;
+	//				 argsBuffer[7]=0x31;
+	//				 argsBuffer[8]=0x2E;
+	//				 argsBuffer[9]=0x64;
+	//				 argsBuffer[10]=0x6F;
+	//				 argsBuffer[11]=0x6C;
+	//				 argsBuffer[12]=0x00;
+	//				 argsBuffer[13]=0x00;					 
+
+	//				lblStatus->Text = "Sent version info..." ;
+
+	//				//Send File Size
+	//				buffer[8] = (compressedFileSize >> 24) & 0xff;
+	//				buffer[9] = (compressedFileSize  >> 16) & 0xff;
+	//				buffer[10] = (compressedFileSize >> 8) & 0xff;
+	//				buffer[11] = compressedFileSize  & 0xff;
+
+	//				//Send Uncompressed file size
+	//				buffer[12] = (fileSize >> 24) & 0xff;
+	//				buffer[13] = (fileSize >> 16) & 0xff;
+	//				buffer[14] = (fileSize >> 8) & 0xff;
+	//				buffer[15] = fileSize & 0xff;
+
+	//				stream->Write(buffer, 0, 16);
+	//				
+	//				lblStatus->Text = "Sending file..." ;
+	//				int offset = 0;
+	//				int current = 0;
+	//				int count = compressedFileSize /blockSize;
+	//				int leftOver = compressedFileSize  % blockSize;
+
+	//				while(current<count) 
+	//				{
+	//					stream->Write(compressedFileContent, offset+stripCount, blockSize);
+	//					offset+=blockSize;
+	//					lblStatus->Text = "Sending file..." + (current+1).ToString() + " / " + count;
+	//					current++;
+	//				}
+
+	//				if (leftOver>0) 
+	//				{
+	//					stream->Write(compressedFileContent, offset+stripCount, compressedFileSize-offset);
+	//				}
+
+	//				stream->Write(argsBuffer, 0, 14);
+	//				
+	//				lblStatus->Text = "Finished Sending!";
+	//				return true;
+	//			} 
+	//			catch(Exception^ ex) 
+	//			{
+	//				MessageBox::Show("Daglar ooy oy, yollar ooy oy....! : " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	//				return false;
+	//			}
+	//			finally 
+	//			{
+	//				if ((client!=nullptr) && (client->Connected))
+	//				{
+	//					stream->Close();
+	//					client->Close();
+	//				}
+	//			}
+
+	//		 }
+
+			 private: bool sendFileNewUncompressed(array<Byte>^fileContent, unsigned int fileSize, int stripCount) 
+			 {
+				 TcpClient^ client;
+				 NetworkStream^ stream;
+				 try {			 
+					 int blockSize = 4*1024;
+					 array<Byte>^buffer = gcnew array<Byte>(16);
+					 array<Byte>^argsBuffer = gcnew array<Byte>(14);
+					 String^ ipAddress = txtIpAddress->Text;
+					 array<String^>^ ipBytes = ipAddress->Split('.');
+
+
+					 lblStatus->Text = "Connecting to " + ipAddress + ":4299..." ;
+					 client = gcnew TcpClient();
+					 client->Connect(ipAddress, 4299);
+					 lblStatus->Text = "Connected to " + ipAddress + ":4299" ;
+
+					 //Send Magic
+					 buffer[0] = 'H';
+					 buffer[1] = 'A';
+					 buffer[2] = 'X';
+					 buffer[3] = 'X';
+
+
+					stream = client->GetStream();
+
+					lblStatus->Text = "Magic sent..." ;
+					//Send Version Info
+					 buffer[4] = 0;
+					 buffer[5] = 5;
+					 buffer[6] = 0;
+					 buffer[7] = 14;
+					 argsBuffer[0]=argsBuffer[1]=argsBuffer[2]=argsBuffer[3]=argsBuffer[4]=argsBuffer[5]=argsBuffer[6]=0x30;
+					 argsBuffer[7]=0x31;
+					 argsBuffer[8]=0x2E;
+					 argsBuffer[9]=0x64;
+					 argsBuffer[10]=0x6F;
+					 argsBuffer[11]=0x6C;
+					 argsBuffer[12]=0x00;
+					 argsBuffer[13]=0x00;					 
+
+					lblStatus->Text = "Sent version info..." ;
+
+					//Send File Size
+					buffer[8] = (fileSize >> 24) & 0xff;
+					buffer[9] = (fileSize  >> 16) & 0xff;
+					buffer[10] = (fileSize >> 8) & 0xff;
+					buffer[11] = fileSize  & 0xff;
+
+					//Send Uncompressed file size
+					buffer[12] = 0;
+					buffer[13] = 0;
+					buffer[14] = 0;
+					buffer[15] = 0;
+
+					stream->Write(buffer, 0, 16);
+					
+					lblStatus->Text = "Sending file..." ;
+					int offset = 0;
+					int current = 0;
+					int count = fileSize /blockSize;
+					int leftOver = fileSize  % blockSize;
+
+					while(current<count) 
+					{
+						stream->Write(fileContent, offset+stripCount, blockSize);
+						offset+=blockSize;
+						lblStatus->Text = "Sending file..." + (current+1).ToString() + " / " + count;
+						current++;
+					}
+
+					if (leftOver>0) 
+					{
+						stream->Write(fileContent, offset+stripCount, fileSize-offset);
+					}
+
+					stream->Write(argsBuffer, 0, 14);
+					
+					lblStatus->Text = guiLang->Translate("FINISHED_SENDING");
+					return true;
+				} 
+				catch(Exception^ ex) 
+				{
+					lblStatus->Text = "";
+					MessageBox::Show(guiLang->Translate("ERROR_SENDING") + " :" + ex->Message, guiLang->Translate("ERROR_HEADER"), MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
+				}
+				finally 
+				{
+					if ((client!=nullptr) && (client->Connected))
+					{
+						stream->Close();
+						client->Close();
+					}
+				}
+
+			 }
+
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) 
 			 {
 
@@ -289,7 +562,7 @@ namespace FE100 {
 
 			   if (!chkDisclaimer->Checked) 
 			    {
-					 MessageBox::Show("You should accept the disclaimer by checking the checkbox next to it...", "Ooops, I can not be held liable for what you doing ;)", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+					MessageBox::Show(guiLang->Translate("DISCLAIMER_TEXT"), guiLang->Translate("DISCLAIMER_HEADER"), MessageBoxButtons::OK, MessageBoxIcon::Warning);
 				 } else {
 					 if (!String::IsNullOrEmpty(packedWadPath)) 
 					 {
@@ -307,7 +580,7 @@ namespace FE100 {
 							   unsigned int wadLength = fileContent->Length;
 							   if (wadLength>2*1024*1024-4) 
 							   {
-								   throw gcnew Exception("Channel wad should be at most 2MB!");
+								   throw gcnew Exception(guiLang->Translate("SIZE_TOO_BIG"));
 							   }
 							   	loader[wadOffset] = (wadLength >> 24) & 0xff;
 								loader[wadOffset+1] = (wadLength >> 16) & 0xff;
@@ -315,11 +588,22 @@ namespace FE100 {
 								loader[wadOffset+3] = wadLength & 0xff;
 
 							    Array::Copy(fileContent, 0, loader, wadOffset+stripCount, fileContent->Length);
-								MessageBox::Show("Installing the latest packed wad for you, make sure you have homebrew channel started!", "Information", MessageBoxButtons::OK, MessageBoxIcon::Information);
-								sendFile(loader, loader->Length-stripCount, stripCount);
+								MessageBox::Show(guiLang->Translate("INSTALLING"), guiLang->Translate("INFO_HEADER"), MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+							    if (chkOldHBC->Checked) 
+								{
+									sendFile(loader, loader->Length-stripCount, stripCount);
+								} else 
+								{
+									//sendFileNew(dolData, dolSize, 0);
+									sendFileNewUncompressed(loader, loader->Length-stripCount, stripCount);
+								}
+
+								
 						 } catch(Exception^ ex) 
 						 {
-							MessageBox::Show("Error building installer!: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+							 lblStatus->Text = "";
+							 MessageBox::Show(guiLang->Translate("INSTALLER_BUILD_ERROR") + ": " + ex->Message, guiLang->Translate("ERROR_HEADER"), MessageBoxButtons::OK, MessageBoxIcon::Error);
 						 }
 						 finally 
 						 {
@@ -330,13 +614,26 @@ namespace FE100 {
 						 }
 					 } else 
 					 {
-						MessageBox::Show("I can't find the latest packed wad... sorry...", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+						 MessageBox::Show(guiLang->Translate("CANTFINDWAD"), guiLang->Translate("ERROR_HEADER"), MessageBoxButtons::OK, MessageBoxIcon::Error);
 					 }
 				 }
 			 }
 private: System::Void Wiiload_Load(System::Object^  sender, System::EventArgs^  e) {
 			 txtIpAddress->Text = defaultIp;
 			 lblLastWad->Text = packedWadPath;
+			 loadMLResources();
 		 }
+
+private: void loadMLResources(){
+	this->label1->Text = guiLang->Translate("IPLABEL") + " :";
+	this->button1->Text = guiLang->Translate("TESTBUTTONTEXT");
+	this->button2->Text = guiLang->Translate("INSTALLBUTTONTEXT");
+	this->chkDisclaimer->Text = guiLang->Translate("CHKDISCLAIMERTEXT");
+	this->label2->Text = guiLang->Translate("REMINDER");
+
+	this->label3->Text = guiLang->Translate("LASTPACKED") + ": ";
+	this->chkOldHBC->Text = guiLang->Translate("OLD_HBC");
+}
+
 };
 }

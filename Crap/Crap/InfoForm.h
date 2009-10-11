@@ -103,7 +103,7 @@ namespace FE100 {
 			// 
 			// txtInfo
 			// 
-			this->txtInfo->Font = (gcnew System::Drawing::Font(L"Courier New", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
+			this->txtInfo->Font = (gcnew System::Drawing::Font(L"Courier New", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
 			this->txtInfo->Location = System::Drawing::Point(8, 10);
 			this->txtInfo->Multiline = true;
@@ -113,6 +113,7 @@ namespace FE100 {
 			this->txtInfo->Size = System::Drawing::Size(597, 482);
 			this->txtInfo->TabIndex = 1;
 			this->txtInfo->Text = resources->GetString(L"txtInfo.Text");
+			this->txtInfo->TextChanged += gcnew System::EventHandler(this, &InfoForm::txtInfo_TextChanged);
 			// 
 			// lblZakCredits
 			// 
@@ -172,6 +173,8 @@ namespace FE100 {
 	private: System::Void InfoForm_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
 				 uFMOD_StopSong();
 			 }
+private: System::Void txtInfo_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+		 }
 };
 }
 
