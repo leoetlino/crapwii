@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ogcsys.h>
 
+#include "config.h"
 #include "disc.h"
 #include "gui.h"
 #include "menu.h"
@@ -12,16 +13,21 @@
 #include "multilang.h"
 
 char defaultDiscId[7];
-char defaultConfig[32];
+char defaultConfig[64];
 
 int main(int argc, char **argv)
 {
 	/* SET DEFAULT CONFIG FOR CRAP */
 	strcpy(defaultDiscId, "CRAPPY");
-	//strcpy(defaultDiscId, "RJ8P64");	//Indiana Jones
+	//strcpy(defaultDiscId, "R3MP01");	//Metroid Prime
 	//strcpy(defaultDiscId, "RVUP8P");	//Virtua tennis
-	strcpy(defaultConfig, "CFGUSB0000000000");
-	
+	//strcpy(defaultConfig, "CFGUSB0000000000");
+	//strcpy(defaultConfig, "CFGUSB1000000100002CE9E0U3MPrs5mp1_p.dol");
+	//strcpy(defaultConfig,   "CFGUSB1000000100002CE9E0U3MPrs5mp1_p.dol");
+	strcpy(defaultConfig,     "CFGUSB00000000100002CE9E0U3MPrs5mp1_p.dol");
+	//strcpy(defaultConfig, "CFGUSB1000000400002CE9E0UMPErs5mp1_p.dol");
+	//strcpy(defaultConfig, "CFGUSB1000000400003FE2F8UMPErs5mp1_p.dol");	
+	//strcpy(defaultConfig, "CFGUSB1000000200003FE2F8UMPErs5mp2_p.dol");
 	s32 ret;
 
 	/* Load Custom IOS */

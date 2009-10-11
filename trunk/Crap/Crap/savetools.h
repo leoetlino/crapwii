@@ -13,7 +13,7 @@
 int twintig(char * app_folder, char * sourceDirectory, char * sourceFolder, char * dataFile);
 int tachtig(char * app_folder, char * dataFile);
 int extract(char * iso, char * filename );
-int extractwad(char * app_folder, char * wadFileName);
+int extractwad(char * extractionfolder, char * app_folder, char * wadFileName);
 int signBanner(char * bannerFile, char * newBannerFile, unsigned char * title_name);
 int packwad(unsigned char * appPath, unsigned char * wadFile, unsigned char* trailerFile,unsigned char  * ticketFile, unsigned char  * tmdFile, unsigned char  * certFile, unsigned char  sign_type, unsigned char  sign_tik, unsigned char  sign_tmd, unsigned char  *new_id);
 

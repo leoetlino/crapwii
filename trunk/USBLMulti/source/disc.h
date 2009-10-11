@@ -41,8 +41,8 @@ s32  Disc_Wait(void);
 s32  Disc_SetWBFS(u32, u8 *);
 s32  Disc_ReadHeader(void *);
 s32  Disc_IsWii(void);
-s32  Disc_BootPartition(bool,bool, int, u64);
-s32  Disc_WiiBoot(bool, bool, int);
+s32  Disc_BootPartition(LoaderConfig, u64);
+s32  Disc_WiiBoot(LoaderConfig);
 
 #endif
 

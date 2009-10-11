@@ -3,7 +3,7 @@
 #include <string.h>
 #include <malloc.h>
 #include <ogcsys.h>
-
+#include "config.h"
 #include "disc.h"
 #include "fat.h"
 #include "gui.h"
@@ -603,14 +603,10 @@ out:
 #endif
 
 
-
 void Menu_Boot(char * discId, char * config)
 {
-	bool verboseLog = false;
-	bool ocarinaSelection = false;
-	int fix=0;
 	struct discHdr *header = NULL;
-
+	LoaderConfig loaderConfig;
 	s32 ret;
 
 	#ifndef __CRAPMODE__
@@ -655,35 +651,33 @@ void Menu_Boot(char * discId, char * config)
 
 	#else
 	
+	parseConfiguration(config, discId, &loaderConfig);
 	
-	verboseLog = config[VERBOSE_LOG] == '1'? true : false;
-	ocarinaSelection = config[OCARINA_SELECTION] == '1' ? true : false;
-	char fixChar = config[FIX];
-	fix = atoi(&fixChar);
+	//sleep(10);
 	
-	if (verboseLog) { printf("USB Loader 1.5 by Waninkoko, Crappified version by WiiCrazy/I.R.on\n"); }
-	if (config[USB_OR_SDCARD]=='1') {
-		if (verboseLog) { printf("Mounting SD Card\n"); }	
+	if (loaderConfig.verboseLog) { printf("USB Loader 1.5 by Waninkoko, Crappified version by WiiCrazy/I.R.on\n"); }
+	if (loaderConfig.useSDLoader) {
+		if (loaderConfig.verboseLog) { printf("Mounting SD Card\n"); }	
 		wbfsDev = WBFS_DEVICE_SDHC;
 		ret = WBFS_Init(2, 15);		
 	} else 
 	{
 		wbfsDev = WBFS_DEVICE_USB;
-		if (verboseLog) { printf("Mounting USB Drive\n"); }		
+		if (loaderConfig.verboseLog) { printf("Mounting USB Drive\n"); }		
 		ret = WBFS_Init(1, 15);
 	}
 	
-	//sleep(1);
+	//sleep(3);
 	
 	WBFS_Open();
 	
-	if (verboseLog) { printf("Setting WBFS Mode\n"); }			
+	if (loaderConfig.verboseLog) { printf("Setting WBFS Mode\n"); }			
 	/* Set WBFS mode */
 	Disc_SetWBFS(wbfsDev, discId);
 	
 	#endif
 
-	if (verboseLog) { printf("Opening Disc\n"); }			
+	if (loaderConfig.verboseLog) { printf("Opening Disc\n"); }			
 	/* Open disc */
 	ret = Disc_Open();
 	if (ret < 0) {
@@ -691,10 +685,10 @@ void Menu_Boot(char * discId, char * config)
 		goto out;
 	}
 	
-	if (verboseLog) { printf("Boting Game %s\n", discId); }
+	if (loaderConfig.verboseLog) { printf("Boting Game %s\n", discId); }
 	
 	/* Boot Wii disc */
-	Disc_WiiBoot(verboseLog, ocarinaSelection, fix);
+	Disc_WiiBoot(loaderConfig);
 
 	printf(MSG_GAME_BOOT_ERROR, ret);
 

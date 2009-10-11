@@ -3,15 +3,6 @@
 
 #ifdef __CRAPMODE__
 
-#define VERBOSE_LOG 6
-#define REGION_OVERRIDE 7
-#define OVERRIDEN_REGION 8
-#define OCARINA_SELECTION 9
-#define FORCE_VIDEO_MODE 10
-#define SELECTED_LANGUAGE 11
-#define USB_OR_SDCARD 12
-#define FIX 15
-
 void Menu_Boot(char *, char *);
 #else
 /* Prototypes */

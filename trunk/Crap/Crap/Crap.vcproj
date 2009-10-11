@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1254"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="Crap"
 	ProjectGUID="{DF86BD9A-81EB-484B-A844-BADA8A8141C2}"
 	RootNamespace="FE100"
@@ -206,6 +206,18 @@
 			AssemblyName="System.Configuration, Version=2.0.0.0, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
 			MinFrameworkVersion="131072"
 		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{137F2B6C-23C5-42AC-B662-27FF91CF4F8E}"
+			RelativePathToProject=".\IOManager\IOManager.csproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{3AF7CC70-0685-4C75-A901-4A019466383E}"
+			RelativePathToProject=".\WiiBackupFileSystem\WiiBackupFileSystem.csproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{7073D98D-0958-444E-974A-7AE292834EA9}"
+			RelativePathToProject=".\MultiLanguage\MultiLanguage.csproj"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -213,6 +225,10 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath=".\AppConfig.cpp"
+				>
+			</File>
 			<File
 				RelativePath=".\AssemblyInfo.cpp"
 				>
@@ -245,12 +261,25 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\WBFSDrive.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\AppConfig.h"
+				FileType="3"
+				>
+				<File
+					RelativePath=".\AppConfig.resx"
+					>
+				</File>
+			</File>
 			<File
 				RelativePath=".\Form1.h"
 				FileType="3"
@@ -272,6 +301,10 @@
 				</File>
 			</File>
 			<File
+				RelativePath=".\libconfig.h++"
+				>
+			</File>
+			<File
 				RelativePath=".\resource.h"
 				>
 			</File>
@@ -286,6 +319,15 @@
 			<File
 				RelativePath=".\ufmod.h"
 				>
+			</File>
+			<File
+				RelativePath=".\WBFSDrive.h"
+				FileType="3"
+				>
+				<File
+					RelativePath=".\WBFSDrive.resx"
+					>
+				</File>
 			</File>
 			<File
 				RelativePath=".\Wiiload.h"

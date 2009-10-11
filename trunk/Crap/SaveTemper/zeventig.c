@@ -323,9 +323,9 @@ static int do_wad(char * appPath)
 	return 0;
 }
 
-int extractwad(char * app_folder, char * wadFileName)
+int extractwad(char * extractionfolder, char * app_folder, char * wadFileName)
 {
-	chdir("temp");
+	chdir(extractionfolder);
 	fp = fopen(wadFileName, "rb");
 
 	if (!fp) {
