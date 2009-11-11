@@ -32,7 +32,9 @@
 #include "codes/codes.h"
 #include "codes/patchcode.h"
 #include "nand.h"
+#ifndef __CRAPMODE__
 #include "background.h"
+#endif
 #include "crapconfig.h"
 
 u32 *xfb = NULL;
@@ -405,13 +407,19 @@ u32 load_dol(u8 *buffer)
 	dolheader *dolfile;
 	dolfile = (dolheader *)buffer;
 	
-	printf("Entrypoint: %08x\n", dolfile->entry_point);
-	printf("BSS: %08x, size = %08x(%u)\n", dolfile->bss_start, dolfile->bss_size, dolfile->bss_size);
+	if (loaderConfig.verboseLog) 
+	{
+		printf("Entrypoint: %08x\n", dolfile->entry_point);
+		printf("BSS: %08x, size = %08x(%u)\n", dolfile->bss_start, dolfile->bss_size, dolfile->bss_size);
+	}
 
 	memset((void *)dolfile->bss_start, 0, dolfile->bss_size);
 	DCFlushRange((void *)dolfile->bss_start, dolfile->bss_size);
 	
-    printf("BSS cleared\n");
+	if (loaderConfig.verboseLog) 
+	{
+		printf("BSS cleared\n");
+	}
 	
 	u32 doloffset;
 	u32 memoffset;
@@ -431,9 +439,11 @@ u32 load_dol(u8 *buffer)
 		doloffset = (u32)buffer + dolfile->text_pos[i];
 		memoffset = dolfile->text_start[i];
 		restsize = dolfile->text_size[i];
-
-		printf("Moving text section %u from %08x to %08x-%08x...", i, dolfile->text_pos[i], dolfile->text_start[i], dolfile->text_start[i]+dolfile->text_size[i]);
-		fflush(stdout);
+		if (loaderConfig.verboseLog) 
+		{
+			printf("Moving text section %u from %08x to %08x-%08x...", i, dolfile->text_pos[i], dolfile->text_start[i], dolfile->text_start[i]+dolfile->text_size[i]);
+			fflush(stdout);
+		}
 			
 		while (restsize > 0)
 		{
@@ -452,9 +462,12 @@ u32 load_dol(u8 *buffer)
 			doloffset += size;
 			memoffset += size;
 		}
-
-		printf("done\n");
-		fflush(stdout);			
+		
+		if (loaderConfig.verboseLog) 
+		{
+			printf("done\n");
+			fflush(stdout);			
+		}
 	}
 
 	for(i = 0; i < 11; i++)
@@ -470,8 +483,11 @@ u32 load_dol(u8 *buffer)
 		memoffset = dolfile->data_start[i];
 		restsize = dolfile->data_size[i];
 
-		printf("Moving data section %u from %08x to %08x-%08x...", i, dolfile->data_pos[i], dolfile->data_start[i], dolfile->data_start[i]+dolfile->data_size[i]);
-		fflush(stdout);
+		if (loaderConfig.verboseLog) 
+		{
+			printf("Moving data section %u from %08x to %08x-%08x...", i, dolfile->data_pos[i], dolfile->data_start[i], dolfile->data_start[i]+dolfile->data_size[i]);
+			fflush(stdout);
+		}
 			
 		while (restsize > 0)
 		{
@@ -490,9 +506,12 @@ u32 load_dol(u8 *buffer)
 			doloffset += size;
 			memoffset += size;
 		}
-
-		printf("done\n");
-		fflush(stdout);			
+		
+		if (loaderConfig.verboseLog) 
+		{
+			printf("done\n");
+			fflush(stdout);			
+		}
 	} 
 	return dolfile->entry_point;
 }
@@ -513,7 +532,10 @@ s32 search_and_read_dol(u64 titleid, u8 **contentBuf, u32 *contentSize, bool ski
 	u32 pressed;
 	u32 pressedGC;
 
-	printf("Reading TMD...");
+	if (loaderConfig.verboseLog) 
+	{
+		printf("Reading TMD...");
+	}
 
 	sprintf(filepath, "/title/%08x/%08x/content/title.tmd", TITLE_UPPER(titleid), TITLE_LOWER(titleid));
 	ret = read_file(filepath, &tmdBuffer, &tmdSize);
@@ -522,7 +544,11 @@ s32 search_and_read_dol(u64 titleid, u8 **contentBuf, u32 *contentSize, bool ski
 		printf("Reading TMD failed\n");
 		return ret;
 	}
-	printf("done\n");
+	
+	if (loaderConfig.verboseLog) 
+	{	
+		printf("done\n");
+	}
 	
 	bootindex = ((tmd *)SIGNATURE_PAYLOAD((signed_blob *)tmdBuffer))->boot_index;
 	p_cr = TMD_CONTENTS(((tmd *)SIGNATURE_PAYLOAD((signed_blob *)tmdBuffer)));
@@ -536,11 +562,14 @@ s32 search_and_read_dol(u64 titleid, u8 **contentBuf, u32 *contentSize, bool ski
 	if (skip_bootcontent)
 	{
 		bootcontent_loaded = false;
-		printf("Searching for main DOL...\n");
+		if (loaderConfig.verboseLog) 
+		{
+			printf("Searching for main DOL...\n");
+		}
 			
 		ret = check_dol(titleid, filepath, bootcontent);
 		if (ret < 0)
-		{
+		{		
 			printf("Searching for main.dol failed\n");
 			printf("Press A to load nand loader instead...\n");
 			waitforbuttonpress(&pressed, &pressedGC);
@@ -556,7 +585,10 @@ s32 search_and_read_dol(u64 titleid, u8 **contentBuf, u32 *contentSize, bool ski
 		bootcontent_loaded = true;
 	}
 	
-    printf("Loading DOL: %s\n", filepath);
+	if (loaderConfig.verboseLog) 
+	{
+		printf("Loading DOL: %s\n", filepath);
+	}
 	
 	ret = read_file(filepath, contentBuf, contentSize);
 	if (ret < 0)
@@ -971,7 +1003,10 @@ void bootTitle(u64 titleid)
 	
 	free(dolbuffer);
 
-	printf(".dol loaded\n");
+	if (loaderConfig.verboseLog) 
+	{
+		printf(".dol loaded\n");
+	}
 
 	ret = identify(titleid, &requested_ios);
 	if (ret < 0)
@@ -987,16 +1022,26 @@ void bootTitle(u64 titleid)
 
 	if (entryPoint != 0x3400)
 	{
-		printf("Setting bus speed\n");
+		if (loaderConfig.verboseLog) 
+		{
+			printf("Setting bus speed\n");
+		}
 		*(u32*)0x800000F8 = 0x0E7BE2C0;
-		printf("Setting cpu speed\n");
+		
+		if (loaderConfig.verboseLog) 
+		{
+			printf("Setting cpu speed\n");
+		}
 		*(u32*)0x800000FC = 0x2B73A840;
 
 		DCFlushRange((void*)0x800000F8, 0xFF);
 	}
 	
 	// Remove 002 error
-	printf("Fake IOS Version(%u)\n", requested_ios);
+	if (loaderConfig.verboseLog) 
+	{
+		printf("Fake IOS Version(%u)\n", requested_ios);
+	}
 	*(u16 *)0x80003140 = requested_ios;
 	*(u16 *)0x80003142 = 0xffff;
 	*(u16 *)0x80003188 = requested_ios;
@@ -1010,8 +1055,11 @@ void bootTitle(u64 titleid)
 	{
 		printf("ES_SetUID failed %d", ret);
 		return;
-	}	
-	printf("ES_SetUID successful\n");
+	}
+	if (loaderConfig.verboseLog) 
+	{	
+		printf("ES_SetUID successful\n");
+	}
 	
 	
 	if (hooktypeoption != 0)
@@ -1022,7 +1070,10 @@ void bootTitle(u64 titleid)
 	
 	patch_dol(bootcontentloaded);
 
-	printf("Loading complete, booting...\n");
+	if (loaderConfig.verboseLog) 
+	{
+		printf("Loading complete, booting...\n");
+	}
 
 	appJump = (entrypoint)entryPoint;
 
@@ -1384,16 +1435,6 @@ int main(int argc, char* argv[])
 
 	#ifndef __CRAPMODE__
 	printheadline();
-	#else 
-	printf("\n\n\n\n\n");
-	printf("\n******************************************************************");
-	printf("\n*--------------------- TRIIFORCE CRAP LOADER --------------------*");
-	printf("\n*                        by WIICRAZY/I.R.on                      *");	
-	printf("\n******************************************************************");
-	printf("\n*      Original program by : WiiPower, Nicksasa, TheLemonMan     *");		
-	printf("\n******************************************************************");
-	printf("\n\n");	
-	
 	#endif
 	IOS_ReloadIOS(249);
 	
@@ -1415,6 +1456,19 @@ int main(int argc, char* argv[])
 	
 	parseConfiguration(defaultConfig, defaultTitleId, &loaderConfig);
 
+#ifdef __CRAPMODE__
+	if (loaderConfig.verboseLog) 
+	{
+		printf("\n\n\n\n\n");
+		printf("\n******************************************************************");
+		printf("\n*--------------------- TRIIFORCE CRAP LOADER --------------------*");
+		printf("\n*                        by WIICRAZY/I.R.on                      *");	
+		printf("\n******************************************************************");
+		printf("\n*      Original program by : WiiPower, Nicksasa, TheLemonMan     *");		
+		printf("\n******************************************************************");
+		printf("\n\n");	
+	}
+#endif
 	u64 titleID = StrTitleIdToLong(loaderConfig.titleId, '1');
 	
 	if (IOS_GetVersion() == 249 && IOS_GetRevision() == 14)

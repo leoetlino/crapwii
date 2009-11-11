@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using Org.Irduco.MultiLanguage;
 
 namespace Tester
@@ -31,6 +32,19 @@ namespace Tester
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Schema.BlockedGames blockedGames = new Schema.BlockedGames();
+            Schema.BlockedGames.GameRow row = blockedGames.Game.NewGameRow();
+            row.discId = "SBLE5G";
+            row.titleId = "SBLE";
+            row.name = "A boy and his blob";
+            blockedGames.Game.AddGameRow(row);
+
+            blockedGames.WriteXml("c:\\sample.xml");
+            
         }
     }
 }

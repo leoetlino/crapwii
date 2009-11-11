@@ -52,7 +52,11 @@
     <Item key="CHANNELWADUNPACKFAIL">Uitpakken van het kanaal is mislukt!</Item>
     <Item key="INVALIDBANNERFORCHANNEL">Valideren van banner mislukt!! Incorrecte banners veroorzaken bannerbricks!!</Item>
     <Item key="CHANNELGENERALERROR">Er werd een generieke fout gedetecteerd tijdens het openen van het kanaal!</Item>
-  </Module>
+    <Item key="BLOCKEDGAMEERROR">The game that you want to create a channel for is reported as a bricker, usage is blocked!</Item>
+    <Item key="CANTGETBLOCKEDGAMES">Can't get blocked games information!\n For your safety, this program won't work without blocked games information.\n Check Crap.config file!\n\nNow exiting!</Item>
+    <Item key="WONTWORKWITHOUTBLOCKEDGAMEINFO">For your safety, this program won't work without blocked games information.\n Check Crap.config file!\n\nNow exiting!</Item>
+
+    </Module>
     <Module key="GUIStatic">
     <Item key="BANNERLABEL">Banner</Item>
     <Item key="BANNERFILEFILTER">Schijf Banner Bestanden|*.bnr|Kanaal Banner Bestanden|*.cbnr</Item>
