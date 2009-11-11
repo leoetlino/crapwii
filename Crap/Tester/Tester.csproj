@@ -74,6 +74,10 @@
       <Project>{7073D98D-0958-444E-974A-7AE292834EA9}</Project>
       <Name>MultiLanguage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Schema\Schema.csproj">
+      <Project>{F05E292F-77E6-4B4B-9208-5C8342AC09BA}</Project>
+      <Name>Schema</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

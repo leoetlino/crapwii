@@ -52,6 +52,10 @@
 <Item key="CHANNELWADUNPACKFAIL">Channel udpakningen mislykkedes!</Item>
 <Item key="INVALIDBANNERFORCHANNEL">Dårlig banner fil!! Dårlige banner filer kan bricke din konsol!!</Item>
 <Item key="CHANNELGENERALERROR">En fejl blev fundet da filen blev åbnet!</Item>
+<Item key="BLOCKEDGAMEERROR">The game that you want to create a channel for is reported as a bricker, usage is blocked!</Item>
+<Item key="CANTGETBLOCKEDGAMES">Can't get blocked games information!\n For your safety, this program won't work without blocked games information.\n Check Crap.config file!\n\nNow exiting!</Item>
+<Item key="WONTWORKWITHOUTBLOCKEDGAMEINFO">For your safety, this program won't work without blocked games information.\n Check Crap.config file!\n\nNow exiting!</Item>
+
 </Module>
 <Module key="GUIStatic">
 <Item key="BANNERLABEL">Banner</Item>

@@ -52,7 +52,10 @@
     <Item key="CHANNELWADUNPACKFAIL">Kanal konnte nicht entpackt werden!</Item>
     <Item key="INVALIDBANNERFORCHANNEL">Banner konnte nicht validiert werden!! Beschädigte Banner führen zu Banner Bricks!!</Item>
     <Item key="CHANNELGENERALERROR">Ein genereller Fehler trat während dem Öffnen des Kanals auf!</Item>
-  </Module>
+    <Item key="BLOCKEDGAMEERROR">The game that you want to create a channel for is reported as a bricker, usage is blocked!</Item>
+    <Item key="CANTGETBLOCKEDGAMES">Can't get blocked games information!\n For your safety, this program won't work without blocked games information.\n Check Crap.config file!\n\nNow exiting!</Item>
+    <Item key="WONTWORKWITHOUTBLOCKEDGAMEINFO">For your safety, this program won't work without blocked games information.\n Check Crap.config file!\n\nNow exiting!</Item>
+        </Module>
         <Module key="GUIStatic">
     <Item key="BANNERLABEL">Banner</Item>
     <Item key="BANNERFILEFILTER">Disk Banner Dateien|*.bnr|Kanal Banner Dateien|*.cbnr</Item>

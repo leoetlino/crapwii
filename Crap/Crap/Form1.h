@@ -28,6 +28,7 @@ namespace FE100 {
 	using namespace WBFSSync;
 	using namespace System::Configuration;
 	using namespace Org::Irduco::MultiLanguage;
+	using namespace Org::Irduco::UpdateManager;
 
 	Config cfg;
 	delegate void StatusUpdater(int index, int type, String^ status);
@@ -197,6 +198,7 @@ namespace FE100 {
 	private: MultiLanguageModuleHelper^ guiLang;
 	private: MultiLanguageModuleHelper^ wiiloadLang;
 	private: MultiLanguageModuleHelper^ settingsLang;
+	private: Org::Irduco::UpdateManager::BlockedGamesManager^ blockedGamesManager;
 	private: bool programModeChannel;
 			 
 
@@ -345,6 +347,7 @@ private: System::Windows::Forms::Button^  btnChannelSelect;
 private: System::Windows::Forms::TextBox^  txtChannel;
 private: System::Windows::Forms::OpenFileDialog^  openFileDialog2;
 private: System::Windows::Forms::ToolStripMenuItem^  openChannelWADToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 
 
 
@@ -494,6 +497,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  openChannelWADToolStripMenu
 			this->officialSiteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->panelBatch = (gcnew System::Windows::Forms::Panel());
 			this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->danishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->panelWBFS->SuspendLayout();
@@ -1407,11 +1411,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  openChannelWADToolStripMenu
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(15) {this->englishToolStripMenuItem, 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(16) {this->englishToolStripMenuItem, 
 				this->turToolStripMenuItem, this->germanToolStripMenuItem, this->frenchToolStripMenuItem, this->spanishToolStripMenuItem, this->ýtalianToolStripMenuItem, 
 				this->portoqueseToolStripMenuItem, this->japaneseToolStripMenuItem, this->sChineseToolStripMenuItem, this->tChineseToolStripMenuItem, 
 				this->koreanToolStripMenuItem, this->russianToolStripMenuItem, this->dutchToolStripMenuItem, this->finnishToolStripMenuItem, 
-				this->swedishToolStripMenuItem});
+				this->swedishToolStripMenuItem, this->danishToolStripMenuItem});
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(66, 20);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -1420,105 +1424,105 @@ private: System::Windows::Forms::ToolStripMenuItem^  openChannelWADToolStripMenu
 			// englishToolStripMenuItem
 			// 
 			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
-			this->englishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->englishToolStripMenuItem->Text = L"English";
 			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::englishToolStripMenuItem_Click);
 			// 
 			// turToolStripMenuItem
 			// 
 			this->turToolStripMenuItem->Name = L"turToolStripMenuItem";
-			this->turToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->turToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->turToolStripMenuItem->Text = L"Turkish";
 			this->turToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::turToolStripMenuItem_Click);
 			// 
 			// germanToolStripMenuItem
 			// 
 			this->germanToolStripMenuItem->Name = L"germanToolStripMenuItem";
-			this->germanToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->germanToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->germanToolStripMenuItem->Text = L"Deutsch";
 			this->germanToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::germanToolStripMenuItem_Click);
 			// 
 			// frenchToolStripMenuItem
 			// 
 			this->frenchToolStripMenuItem->Name = L"frenchToolStripMenuItem";
-			this->frenchToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->frenchToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->frenchToolStripMenuItem->Text = L"French";
 			this->frenchToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::frenchToolStripMenuItem_Click);
 			// 
 			// spanishToolStripMenuItem
 			// 
 			this->spanishToolStripMenuItem->Name = L"spanishToolStripMenuItem";
-			this->spanishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->spanishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->spanishToolStripMenuItem->Text = L"Spanish";
 			this->spanishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::spanishToolStripMenuItem_Click);
 			// 
 			// ýtalianToolStripMenuItem
 			// 
 			this->ýtalianToolStripMenuItem->Name = L"ýtalianToolStripMenuItem";
-			this->ýtalianToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->ýtalianToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->ýtalianToolStripMenuItem->Text = L"Italian";
 			this->ýtalianToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::ýtalianToolStripMenuItem_Click);
 			// 
 			// portoqueseToolStripMenuItem
 			// 
 			this->portoqueseToolStripMenuItem->Name = L"portoqueseToolStripMenuItem";
-			this->portoqueseToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->portoqueseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->portoqueseToolStripMenuItem->Text = L"Portoquese";
 			this->portoqueseToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::portoqueseToolStripMenuItem_Click);
 			// 
 			// japaneseToolStripMenuItem
 			// 
 			this->japaneseToolStripMenuItem->Name = L"japaneseToolStripMenuItem";
-			this->japaneseToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->japaneseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->japaneseToolStripMenuItem->Text = L"Japanese";
 			this->japaneseToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::japaneseToolStripMenuItem_Click);
 			// 
 			// sChineseToolStripMenuItem
 			// 
 			this->sChineseToolStripMenuItem->Name = L"sChineseToolStripMenuItem";
-			this->sChineseToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->sChineseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->sChineseToolStripMenuItem->Text = L"S.Chinese";
 			this->sChineseToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::sChineseToolStripMenuItem_Click);
 			// 
 			// tChineseToolStripMenuItem
 			// 
 			this->tChineseToolStripMenuItem->Name = L"tChineseToolStripMenuItem";
-			this->tChineseToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->tChineseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->tChineseToolStripMenuItem->Text = L"T.Chinese";
 			this->tChineseToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::tChineseToolStripMenuItem_Click);
 			// 
 			// koreanToolStripMenuItem
 			// 
 			this->koreanToolStripMenuItem->Name = L"koreanToolStripMenuItem";
-			this->koreanToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->koreanToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->koreanToolStripMenuItem->Text = L"Korean";
 			this->koreanToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::koreanToolStripMenuItem_Click);
 			// 
 			// russianToolStripMenuItem
 			// 
 			this->russianToolStripMenuItem->Name = L"russianToolStripMenuItem";
-			this->russianToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->russianToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->russianToolStripMenuItem->Text = L"Russian";
 			this->russianToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::russianToolStripMenuItem_Click);
 			// 
 			// dutchToolStripMenuItem
 			// 
 			this->dutchToolStripMenuItem->Name = L"dutchToolStripMenuItem";
-			this->dutchToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->dutchToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->dutchToolStripMenuItem->Text = L"Dutch";
 			this->dutchToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::dutchToolStripMenuItem_Click);
 			// 
 			// finnishToolStripMenuItem
 			// 
 			this->finnishToolStripMenuItem->Name = L"finnishToolStripMenuItem";
-			this->finnishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->finnishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->finnishToolStripMenuItem->Text = L"Finnish";
 			this->finnishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::finnishToolStripMenuItem_Click);
 			// 
 			// swedishToolStripMenuItem
 			// 
 			this->swedishToolStripMenuItem->Name = L"swedishToolStripMenuItem";
-			this->swedishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->swedishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->swedishToolStripMenuItem->Text = L"Swedish";
 			this->swedishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::swedishToolStripMenuItem_Click);
 			// 
@@ -1573,6 +1577,13 @@ private: System::Windows::Forms::ToolStripMenuItem^  openChannelWADToolStripMenu
 			// 
 			this->openFileDialog2->DefaultExt = L"wad";
 			this->openFileDialog2->Filter = L"Channel files|*.wad";
+			// 
+			// danishToolStripMenuItem
+			// 
+			this->danishToolStripMenuItem->Name = L"danishToolStripMenuItem";
+			this->danishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->danishToolStripMenuItem->Text = L"Danish";
+			this->danishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::danishToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -1641,7 +1652,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  openChannelWADToolStripMenu
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
-			this->Text = L"Crap 2.0b / By WiiCrazy (I.R.on) ";
+			this->Text = L"Crap 2.1b / By WiiCrazy (I.R.on) ";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Form1::Form1_DragDrop);
 			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Form1::Form1_DragEnter);
@@ -1715,6 +1726,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  openChannelWADToolStripMenu
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {		 
 				 showInfoWindow();
 			 }
+
+template <typename T>T Parse(String^ value)
+{
+    return safe_cast<T>(Enum::Parse(T::typeid,
+                                    value,
+                                    false));
+}
+
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 			 programModeChannel = false;
 			 altDolCount = -1;
@@ -1764,6 +1783,26 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 
 			cmbAltDolType->SelectedIndex = 0;
 
+			try {
+				//BlockedGamesManager::BlockedGameType blockageType = Enum::Parse(BlockedGamesManager::BlockedGameType, ConfigurationManager::AppSettings["GameBlockageType"]);				
+				BlockedGamesManager::BlockedGameType blockageType = Parse<BlockedGamesManager::BlockedGameType>(ConfigurationManager::AppSettings["GameBlockageType"]);				
+				blockedGamesManager = gcnew BlockedGamesManager(ConfigurationManager::AppSettings["BlockedGamesUrl"], baseDirectory + "\\"+ "BlockedGames.xml", blockageType);
+				blockageType = blockedGamesManager->GetBlockedGames();
+				if (blockageType == BlockedGamesManager::BlockedGameType::None) 
+				{
+					MessageBox::Show(interfaceLang->TranslateAndReplace("WONTWORKWITHOUTBLOCKEDGAMEINFO","\\n", "\n"),interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
+					this->Close();
+					return;
+				}
+
+				if (blockageType==BlockedGamesManager::BlockedGameType::Internet) 
+				{
+					blockedGamesManager->UpdateLocalBlockedGames();
+				}
+			} catch(Exception^ ex) {
+				MessageBox::Show(interfaceLang->TranslateAndReplace("CANTGETBLOCKEDGAMES","\\n", "\n") + " : " + ex->Message,interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
+				this->Close();
+			}
 		 }
 
 
@@ -1870,10 +1909,10 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 			 } else {
 				 if (fullPath->Length == indexOfPoint+4) {
 					String^ discId = fullPath->Substring(indexOfPoint-6, 6);
-					if (discId[0]!='R') 
-					{
-						return "";
-					}
+					//if (discId[0]!='R') 
+					//{
+					//	return "";
+					//}
 					return discId;
 				 } else 
 				 {
@@ -1970,6 +2009,12 @@ private: bool handleBannerChange(String^ bannerFile, String^ actualGameName, Str
 			String^ discId = parseDiscId(bannerFile);
 			if (discId!="") 
 			{
+				if (blockedGamesManager->IsGameBlocked(discId)) 
+				{
+					MessageBox::Show(interfaceLang->Translate("BLOCKEDGAMEERROR"), interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
+				}
+
 				setDisc(discId);
 				btnCreate->Enabled = true;
 				if (String::IsNullOrEmpty(actualGameName)) 
@@ -3694,6 +3739,9 @@ private: System::Void btnChannelSelect_Click(System::Object^  sender, System::Ev
 		 }
 private: System::Void openChannelWADToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 handleChannel();
+		 }
+private: System::Void danishToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		changeLanguage("Danish");
 		 }
 };
 

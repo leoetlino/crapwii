@@ -51,7 +51,11 @@
     <Item key="INVALIDBANNERTITLEID">Kanal banner dosyası gibi gözükmüyor. Dosya ismi içerisinde kanal'ın title id'si geçmelidir.</Item>
     <Item key="CHANNELWADUNPACKFAIL">Kanal açılırken hata ile karşılaşıldı!</Item>
     <Item key="CHANNELGENERALERROR">Kanal açılırken genel bir hata ile karşılaşıldı!</Item>
-    </Module>
+    <Item key="BLOCKEDGAMEERROR">Kanalını yaratmak istediğiniz oyun banner brick'e sebep olan bir banner'a sahiptir, bu yüzden bloke edilmiştir!</Item>
+    <Item key="CANTGETBLOCKEDGAMES">Bloke edilen oyunların listesi çekilemedi!\n Güvenliğiniz için bu program bloke edilmiş oyun listesi kullanmadan çalışmaz!\n Crap.config dosyasını kontrol edin!\n\nProgram kapatılıyor!</Item>
+    <Item key="WONTWORKWITHOUTBLOCKEDGAMEINFO">Güvenliğiniz için bu program bloke edilmiş oyun listesi kullanmadan çalışmaz!\n Crap.config dosyasını kontrol edin!\n\nProgram kapatılıyor!</Item>
+
+  </Module>
   <Module key="GUIStatic">
     <Item key="BANNERLABEL">Banner</Item>
     <Item key="BANNERFILEFILTER">Disk Banner dosyaları|*.bnr|Kanal Banner dosyaları|*.cbnr</Item>

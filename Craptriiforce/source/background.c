@@ -1,3 +1,4 @@
+#ifndef __CRAPMODE__
 #include <ogcsys.h>
 
 #include "libpng/pngu/pngu.h"
@@ -52,3 +53,4 @@ void DrawBackground(GXRModeObj *vmode)
 	/* Draw background */
 	DrawPng((u8 *)background_png, 0, 0, vmode);
 } 
+#endif
