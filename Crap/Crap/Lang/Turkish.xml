@@ -54,6 +54,7 @@
     <Item key="BLOCKEDGAMEERROR">Kanalını yaratmak istediğiniz oyun banner brick'e sebep olan bir banner'a sahiptir, bu yüzden bloke edilmiştir!</Item>
     <Item key="CANTGETBLOCKEDGAMES">Bloke edilen oyunların listesi çekilemedi!\n Güvenliğiniz için bu program bloke edilmiş oyun listesi kullanmadan çalışmaz!\n Crap.config dosyasını kontrol edin!\n\nProgram kapatılıyor!</Item>
     <Item key="WONTWORKWITHOUTBLOCKEDGAMEINFO">Güvenliğiniz için bu program bloke edilmiş oyun listesi kullanmadan çalışmaz!\n Crap.config dosyasını kontrol edin!\n\nProgram kapatılıyor!</Item>
+    <Item key="SELECT_PARTITION">Lütfen oyunun bulunduğu disk bölümünü seçin!</Item>
 
   </Module>
   <Module key="GUIStatic">
@@ -154,6 +155,7 @@
     <Item key="FEATURENOTRELATED">Alakasız</Item>
     <Item key="OPENCHANNELWAD">Kanal Dosyası(WAD) Aç</Item>
     <Item key="WADFILESFILTER">Kanal Dosyaları|*.wad</Item>
+    <Item key="PARTITION_SELECTION">Disk bölümü</Item>
   </Module>
 	<Module key="Wiiload">
     <Item key="ERROR_HEADER">Hata</Item>
