@@ -55,6 +55,7 @@
     <Item key="BLOCKEDGAMEERROR">The game that you want to create a channel for is reported as a bricker, usage is blocked!</Item>
     <Item key="CANTGETBLOCKEDGAMES">Can't get blocked games information!\n For your safety, this program won't work without blocked games information.\n Check Crap.config file!\n\nNow exiting!</Item>
     <Item key="WONTWORKWITHOUTBLOCKEDGAMEINFO">For your safety, this program won't work without blocked games information.\n Check Crap.config file!\n\nNow exiting!</Item>
+    <Item key="SELECT_PARTITION">Please select the partition.</Item>
   </Module>
 	<Module key="GUIStatic">
     <Item key="BANNERLABEL">Banner</Item>
@@ -154,6 +155,7 @@
     <Item key="FEATURENOTRELATED">Not Related</Item>
     <Item key="OPENCHANNELWAD">Open Channel(WAD)</Item>
     <Item key="WADFILESFILTER">Channel files|*.wad</Item>
+    <Item key="PARTITION_SELECTION">Game Partition</Item>
   </Module>
 	<Module key="Wiiload">
     <Item key="ERROR_HEADER">Error</Item>

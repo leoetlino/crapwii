@@ -348,6 +348,14 @@ private: System::Windows::Forms::TextBox^  txtChannel;
 private: System::Windows::Forms::OpenFileDialog^  openFileDialog2;
 private: System::Windows::Forms::ToolStripMenuItem^  openChannelWADToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
+private: System::Windows::Forms::Panel^  panelOptions;
+private: System::Windows::Forms::Panel^  panelPartition;
+
+private: System::Windows::Forms::Label^  label25;
+private: System::Windows::Forms::ComboBox^  cmbPartition;
+private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
+
+
 
 
 
@@ -490,6 +498,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->dutchToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->finnishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->swedishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->danishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->configureToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ipAddressToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -497,7 +506,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->officialSiteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->panelBatch = (gcnew System::Windows::Forms::Panel());
 			this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->danishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->panelOptions = (gcnew System::Windows::Forms::Panel());
+			this->panelPartition = (gcnew System::Windows::Forms::Panel());
+			this->label25 = (gcnew System::Windows::Forms::Label());
+			this->cmbPartition = (gcnew System::Windows::Forms::ComboBox());
+			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->panelWBFS->SuspendLayout();
@@ -505,6 +518,8 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->groupBox4->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->panelBatch->SuspendLayout();
+			this->panelOptions->SuspendLayout();
+			this->panelPartition->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// txtDataFile
@@ -544,7 +559,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			// label3
 			// 
-			this->label3->Location = System::Drawing::Point(9, 241);
+			this->label3->Location = System::Drawing::Point(9, 167);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(105, 13);
 			this->label3->TabIndex = 13;
@@ -553,7 +568,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			// txtTitleId
 			// 
-			this->txtTitleId->Location = System::Drawing::Point(115, 238);
+			this->txtTitleId->Location = System::Drawing::Point(115, 164);
 			this->txtTitleId->MaxLength = 4;
 			this->txtTitleId->Name = L"txtTitleId";
 			this->txtTitleId->Size = System::Drawing::Size(63, 20);
@@ -561,7 +576,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			// label4
 			// 
-			this->label4->Location = System::Drawing::Point(182, 241);
+			this->label4->Location = System::Drawing::Point(182, 167);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(88, 13);
 			this->label4->TabIndex = 16;
@@ -571,7 +586,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// txtDiscId
 			// 
 			this->txtDiscId->AutoSize = true;
-			this->txtDiscId->Location = System::Drawing::Point(269, 241);
+			this->txtDiscId->Location = System::Drawing::Point(269, 167);
 			this->txtDiscId->Name = L"txtDiscId";
 			this->txtDiscId->Size = System::Drawing::Size(49, 13);
 			this->txtDiscId->TabIndex = 17;
@@ -580,7 +595,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// btnCreate
 			// 
 			this->btnCreate->Enabled = false;
-			this->btnCreate->Location = System::Drawing::Point(17, 483);
+			this->btnCreate->Location = System::Drawing::Point(17, 487);
 			this->btnCreate->Name = L"btnCreate";
 			this->btnCreate->Size = System::Drawing::Size(134, 23);
 			this->btnCreate->TabIndex = 18;
@@ -592,7 +607,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			this->chkVerbose->AutoSize = true;
 			this->chkVerbose->Enabled = false;
-			this->chkVerbose->Location = System::Drawing::Point(115, 261);
+			this->chkVerbose->Location = System::Drawing::Point(114, 78);
 			this->chkVerbose->Name = L"chkVerbose";
 			this->chkVerbose->Size = System::Drawing::Size(159, 17);
 			this->chkVerbose->TabIndex = 19;
@@ -604,14 +619,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->cmbRegion->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cmbRegion->Enabled = false;
 			this->cmbRegion->FormattingEnabled = true;
-			this->cmbRegion->Location = System::Drawing::Point(116, 341);
+			this->cmbRegion->Location = System::Drawing::Point(115, 158);
 			this->cmbRegion->Name = L"cmbRegion";
 			this->cmbRegion->Size = System::Drawing::Size(71, 21);
 			this->cmbRegion->TabIndex = 20;
 			// 
 			// label1
 			// 
-			this->label1->Location = System::Drawing::Point(6, 344);
+			this->label1->Location = System::Drawing::Point(5, 161);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(108, 13);
 			this->label1->TabIndex = 21;
@@ -772,7 +787,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			// btnTest
 			// 
-			this->btnTest->Location = System::Drawing::Point(176, 483);
+			this->btnTest->Location = System::Drawing::Point(176, 487);
 			this->btnTest->Name = L"btnTest";
 			this->btnTest->Size = System::Drawing::Size(119, 23);
 			this->btnTest->TabIndex = 40;
@@ -784,7 +799,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			this->chkForceVideoMode->AutoSize = true;
 			this->chkForceVideoMode->Enabled = false;
-			this->chkForceVideoMode->Location = System::Drawing::Point(115, 276);
+			this->chkForceVideoMode->Location = System::Drawing::Point(114, 93);
 			this->chkForceVideoMode->Name = L"chkForceVideoMode";
 			this->chkForceVideoMode->Size = System::Drawing::Size(217, 17);
 			this->chkForceVideoMode->TabIndex = 42;
@@ -798,14 +813,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->cmbLanguage->FormattingEnabled = true;
 			this->cmbLanguage->Items->AddRange(gcnew cli::array< System::Object^  >(12) {L"0 - System Default", L"1- Japanese", L"2- English", 
 				L"3- German", L"4- French", L"5- Spanish", L"6- Italian", L"7- Dutch", L"8- S.Chinese", L"9- T.Chinese", L"A- Korean", L"B- Turkish (just joking!)"});
-			this->cmbLanguage->Location = System::Drawing::Point(116, 366);
+			this->cmbLanguage->Location = System::Drawing::Point(115, 183);
 			this->cmbLanguage->Name = L"cmbLanguage";
 			this->cmbLanguage->Size = System::Drawing::Size(121, 21);
 			this->cmbLanguage->TabIndex = 43;
 			// 
 			// label12
 			// 
-			this->label12->Location = System::Drawing::Point(5, 369);
+			this->label12->Location = System::Drawing::Point(4, 186);
 			this->label12->Name = L"label12";
 			this->label12->Size = System::Drawing::Size(109, 13);
 			this->label12->TabIndex = 44;
@@ -873,7 +888,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			this->chkOcarinaSupport->AutoSize = true;
 			this->chkOcarinaSupport->Enabled = false;
-			this->chkOcarinaSupport->Location = System::Drawing::Point(115, 291);
+			this->chkOcarinaSupport->Location = System::Drawing::Point(114, 108);
 			this->chkOcarinaSupport->Name = L"chkOcarinaSupport";
 			this->chkOcarinaSupport->Size = System::Drawing::Size(216, 17);
 			this->chkOcarinaSupport->TabIndex = 51;
@@ -905,14 +920,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->cmbLoaderType->Enabled = false;
 			this->cmbLoaderType->FormattingEnabled = true;
 			this->cmbLoaderType->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"USB Loader", L"SD/SDHC Loader"});
-			this->cmbLoaderType->Location = System::Drawing::Point(115, 164);
+			this->cmbLoaderType->Location = System::Drawing::Point(114, 1);
 			this->cmbLoaderType->Name = L"cmbLoaderType";
 			this->cmbLoaderType->Size = System::Drawing::Size(121, 21);
 			this->cmbLoaderType->TabIndex = 54;
 			// 
 			// label17
 			// 
-			this->label17->Location = System::Drawing::Point(8, 167);
+			this->label17->Location = System::Drawing::Point(7, 4);
 			this->label17->Name = L"label17";
 			this->label17->Size = System::Drawing::Size(106, 13);
 			this->label17->TabIndex = 55;
@@ -965,7 +980,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->groupBox1->Controls->Add(this->radBtn3);
 			this->groupBox1->Controls->Add(this->radBtn2);
 			this->groupBox1->Controls->Add(this->radBtn1);
-			this->groupBox1->Location = System::Drawing::Point(9, 393);
+			this->groupBox1->Location = System::Drawing::Point(9, 397);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(295, 72);
 			this->groupBox1->TabIndex = 61;
@@ -1108,14 +1123,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->cmbDolList->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cmbDolList->Enabled = false;
 			this->cmbDolList->FormattingEnabled = true;
-			this->cmbDolList->Location = System::Drawing::Point(115, 188);
+			this->cmbDolList->Location = System::Drawing::Point(114, 25);
 			this->cmbDolList->Name = L"cmbDolList";
 			this->cmbDolList->Size = System::Drawing::Size(121, 21);
 			this->cmbDolList->TabIndex = 72;
 			// 
 			// label20
 			// 
-			this->label20->Location = System::Drawing::Point(6, 191);
+			this->label20->Location = System::Drawing::Point(5, 28);
 			this->label20->Name = L"label20";
 			this->label20->Size = System::Drawing::Size(108, 13);
 			this->label20->TabIndex = 73;
@@ -1127,7 +1142,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->groupBox2->Controls->Add(this->chkNewStyle002Fix);
 			this->groupBox2->Controls->Add(this->chkOldStyle002Fix);
 			this->groupBox2->Controls->Add(this->chkAnti002Fix);
-			this->groupBox2->Location = System::Drawing::Point(11, 305);
+			this->groupBox2->Location = System::Drawing::Point(10, 122);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(293, 34);
 			this->groupBox2->TabIndex = 74;
@@ -1164,14 +1179,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->cmbAltDolType->FormattingEnabled = true;
 			this->cmbAltDolType->Items->AddRange(gcnew cli::array< System::Object^  >(4) {L"Don\'t use Alt-dol", L"Alt dol from NAND", 
 				L"Alt dol from SD", L"Alt dol from DISC"});
-			this->cmbAltDolType->Location = System::Drawing::Point(115, 213);
+			this->cmbAltDolType->Location = System::Drawing::Point(114, 50);
 			this->cmbAltDolType->Name = L"cmbAltDolType";
 			this->cmbAltDolType->Size = System::Drawing::Size(121, 21);
 			this->cmbAltDolType->TabIndex = 79;
 			// 
 			// label22
 			// 
-			this->label22->Location = System::Drawing::Point(6, 216);
+			this->label22->Location = System::Drawing::Point(5, 53);
 			this->label22->Name = L"label22";
 			this->label22->Size = System::Drawing::Size(108, 13);
 			this->label22->TabIndex = 80;
@@ -1362,7 +1377,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
-			this->menuStrip1->Size = System::Drawing::Size(820, 24);
+			this->menuStrip1->Size = System::Drawing::Size(813, 24);
 			this->menuStrip1->TabIndex = 84;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -1411,11 +1426,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(16) {this->englishToolStripMenuItem, 
-				this->turToolStripMenuItem, this->germanToolStripMenuItem, this->frenchToolStripMenuItem, this->spanishToolStripMenuItem, this->ýtalianToolStripMenuItem, 
-				this->portoqueseToolStripMenuItem, this->japaneseToolStripMenuItem, this->sChineseToolStripMenuItem, this->tChineseToolStripMenuItem, 
-				this->koreanToolStripMenuItem, this->russianToolStripMenuItem, this->dutchToolStripMenuItem, this->finnishToolStripMenuItem, 
-				this->swedishToolStripMenuItem, this->danishToolStripMenuItem});
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(17) {this->englishToolStripMenuItem, 
+				this->turToolStripMenuItem, this->germanToolStripMenuItem, this->toolStripMenuItem1, this->frenchToolStripMenuItem, this->spanishToolStripMenuItem, 
+				this->ýtalianToolStripMenuItem, this->portoqueseToolStripMenuItem, this->japaneseToolStripMenuItem, this->sChineseToolStripMenuItem, 
+				this->tChineseToolStripMenuItem, this->koreanToolStripMenuItem, this->russianToolStripMenuItem, this->dutchToolStripMenuItem, 
+				this->finnishToolStripMenuItem, this->swedishToolStripMenuItem, this->danishToolStripMenuItem});
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(66, 20);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -1446,7 +1461,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			// 
 			this->frenchToolStripMenuItem->Name = L"frenchToolStripMenuItem";
 			this->frenchToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->frenchToolStripMenuItem->Text = L"French";
+			this->frenchToolStripMenuItem->Text = L"French-2";
 			this->frenchToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::frenchToolStripMenuItem_Click);
 			// 
 			// spanishToolStripMenuItem
@@ -1526,6 +1541,13 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->swedishToolStripMenuItem->Text = L"Swedish";
 			this->swedishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::swedishToolStripMenuItem_Click);
 			// 
+			// danishToolStripMenuItem
+			// 
+			this->danishToolStripMenuItem->Name = L"danishToolStripMenuItem";
+			this->danishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->danishToolStripMenuItem->Text = L"Danish";
+			this->danishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::danishToolStripMenuItem_Click);
+			// 
 			// configureToolStripMenuItem
 			// 
 			this->configureToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->ipAddressToolStripMenuItem});
@@ -1578,12 +1600,64 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->openFileDialog2->DefaultExt = L"wad";
 			this->openFileDialog2->Filter = L"Channel files|*.wad";
 			// 
-			// danishToolStripMenuItem
+			// panelOptions
 			// 
-			this->danishToolStripMenuItem->Name = L"danishToolStripMenuItem";
-			this->danishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->danishToolStripMenuItem->Text = L"Danish";
-			this->danishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::danishToolStripMenuItem_Click);
+			this->panelOptions->Controls->Add(this->label17);
+			this->panelOptions->Controls->Add(this->cmbLoaderType);
+			this->panelOptions->Controls->Add(this->cmbDolList);
+			this->panelOptions->Controls->Add(this->label20);
+			this->panelOptions->Controls->Add(this->groupBox2);
+			this->panelOptions->Controls->Add(this->label22);
+			this->panelOptions->Controls->Add(this->cmbAltDolType);
+			this->panelOptions->Controls->Add(this->chkVerbose);
+			this->panelOptions->Controls->Add(this->cmbRegion);
+			this->panelOptions->Controls->Add(this->label1);
+			this->panelOptions->Controls->Add(this->chkForceVideoMode);
+			this->panelOptions->Controls->Add(this->cmbLanguage);
+			this->panelOptions->Controls->Add(this->chkOcarinaSupport);
+			this->panelOptions->Controls->Add(this->label12);
+			this->panelOptions->Location = System::Drawing::Point(1, 186);
+			this->panelOptions->Name = L"panelOptions";
+			this->panelOptions->Size = System::Drawing::Size(306, 213);
+			this->panelOptions->TabIndex = 86;
+			// 
+			// panelPartition
+			// 
+			this->panelPartition->Controls->Add(this->label25);
+			this->panelPartition->Controls->Add(this->cmbPartition);
+			this->panelPartition->Location = System::Drawing::Point(1, 186);
+			this->panelPartition->Name = L"panelPartition";
+			this->panelPartition->Size = System::Drawing::Size(303, 100);
+			this->panelPartition->TabIndex = 87;
+			this->panelPartition->Visible = false;
+			// 
+			// label25
+			// 
+			this->label25->Location = System::Drawing::Point(5, 21);
+			this->label25->Name = L"label25";
+			this->label25->Size = System::Drawing::Size(109, 16);
+			this->label25->TabIndex = 1;
+			this->label25->Text = L"Game Partition : ";
+			this->label25->TextAlign = System::Drawing::ContentAlignment::TopRight;
+			this->label25->Click += gcnew System::EventHandler(this, &Form1::label25_Click);
+			// 
+			// cmbPartition
+			// 
+			this->cmbPartition->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->cmbPartition->FormattingEnabled = true;
+			this->cmbPartition->Items->AddRange(gcnew cli::array< System::Object^  >(8) {L"0 - WBFS 1", L"1 - WBFS 2", L"2 - WBFS 3", 
+				L"3 - WBFS 4", L"4- FAT 1", L"5- FAT 2", L"6- FAT 3", L"7- FAT 4"});
+			this->cmbPartition->Location = System::Drawing::Point(114, 17);
+			this->cmbPartition->Name = L"cmbPartition";
+			this->cmbPartition->Size = System::Drawing::Size(168, 21);
+			this->cmbPartition->TabIndex = 0;
+			// 
+			// toolStripMenuItem1
+			// 
+			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
+			this->toolStripMenuItem1->Size = System::Drawing::Size(152, 22);
+			this->toolStripMenuItem1->Text = L"French-1";
+			this->toolStripMenuItem1->Click += gcnew System::EventHandler(this, &Form1::toolStripMenuItem1_Click);
 			// 
 			// Form1
 			// 
@@ -1591,33 +1665,24 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
-			this->ClientSize = System::Drawing::Size(820, 517);
+			this->ClientSize = System::Drawing::Size(813, 522);
+			this->Controls->Add(this->panelPartition);
+			this->Controls->Add(this->panelOptions);
 			this->Controls->Add(this->panelWBFS);
 			this->Controls->Add(this->panelBatch);
 			this->Controls->Add(this->groupBox4);
-			this->Controls->Add(this->label22);
-			this->Controls->Add(this->cmbAltDolType);
-			this->Controls->Add(this->groupBox2);
-			this->Controls->Add(this->label20);
-			this->Controls->Add(this->cmbDolList);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->lblGameName);
 			this->Controls->Add(this->lblGameNameLbl);
-			this->Controls->Add(this->label17);
-			this->Controls->Add(this->cmbLoaderType);
 			this->Controls->Add(this->lblSdCardSupport);
 			this->Controls->Add(this->label16);
-			this->Controls->Add(this->chkOcarinaSupport);
 			this->Controls->Add(this->lblForceLanguageSupport);
 			this->Controls->Add(this->lblOcarinaSupport);
 			this->Controls->Add(this->lblForceVideoModeSupport);
 			this->Controls->Add(this->label15);
 			this->Controls->Add(this->label14);
 			this->Controls->Add(this->label13);
-			this->Controls->Add(this->label12);
-			this->Controls->Add(this->cmbLanguage);
-			this->Controls->Add(this->chkForceVideoMode);
 			this->Controls->Add(this->btnTest);
 			this->Controls->Add(this->lblVerboseLog);
 			this->Controls->Add(this->label11);
@@ -1635,9 +1700,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->lblLoader);
 			this->Controls->Add(this->cmbLoaders);
-			this->Controls->Add(this->label1);
-			this->Controls->Add(this->cmbRegion);
-			this->Controls->Add(this->chkVerbose);
 			this->Controls->Add(this->btnCreate);
 			this->Controls->Add(this->txtDiscId);
 			this->Controls->Add(this->label4);
@@ -1652,7 +1714,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
-			this->Text = L"Crap 2.1b / By WiiCrazy (I.R.on) ";
+			this->Text = L"Crap 2.2b / By WiiCrazy (I.R.on) ";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Form1::Form1_DragDrop);
 			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Form1::Form1_DragEnter);
@@ -1669,6 +1731,9 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->panelBatch->ResumeLayout(false);
+			this->panelOptions->ResumeLayout(false);
+			this->panelOptions->PerformLayout();
+			this->panelPartition->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -1704,20 +1769,27 @@ private: System::Windows::Forms::ToolStripMenuItem^  danishToolStripMenuItem;
 	private: void addLoaders() 
 	{
 		cmbLoaders->Items->Clear();	
+		hideOptionPanels();
 		addDiscLoaders();
 		addChannelLoaders();
 	}
 
 	private: void setDiscLoaders() {
 		cmbLoaders->Items->Clear();	
+		hideOptionPanels();
 		addDiscLoaders();
 	}
 
  	private: void setChannelLoaders() {
 		cmbLoaders->Items->Clear();	
+		hideOptionPanels();
 		addChannelLoaders();
 	}
 
+	private: void hideOptionPanels() {
+ 		panelOptions->Visible = false;
+		panelPartition->Visible = false;
+	}
 	private: void showInfoWindow() {
 		this->frm = (gcnew FE100::InfoForm(this->appDomain));
 		frm->ShowDialog(this);
@@ -2184,6 +2256,8 @@ private: System::Void button4_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
+			bool partitionSelection = panelPartition->Enabled;
+			
 			bool altDolEnabled = cmbAltDolType->Enabled;			
 			bool regionOverrideEnabled = cmbRegion->Enabled;
 			char selectedRegion = ((String^)cmbRegion->SelectedItem)[0];
@@ -2193,6 +2267,8 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 			int altDolType = 0;
 			int selectedAltDol;
 			unsigned int altDolOffset;
+
+			int selectedPartition = -1;
 
 			if (altDolEnabled) 
 			{
@@ -2343,8 +2419,19 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 				MessageBox::Show(String::Format(interfaceLang->Translate("ALTDOLNOTIFY"), altDolFile) , interfaceLang->Translate("ALTDOLNOTIFYHEADER"), MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 
+			if (partitionSelection) 
+			{
+				if (cmbPartition->SelectedIndex<0) 
+				{
+					MessageBox::Show(String::Format(interfaceLang->Translate("SELECT_PARTITION"), altDolFile) , interfaceLang->Translate("ALTDOLNOTIFYHEADER"), MessageBoxButtons::OK, MessageBoxIcon::Information);
+				} else 
+				{
+					selectedPartition = cmbPartition->SelectedIndex;
+				}
+			}
+
 			StatusUpdater^ updater = gcnew StatusUpdater(this,&FE100::Form1::NoUpdateStats);
-			String^ error = PackWad(0,0, regionOverrideEnabled, selectedRegion, forceVideo, verboseLog, ocarinaEnabled, forceLanguage, selectedLanguage, forceLoader, fixes, selectedLoader, bannerFilename, selectedDiscId, selectedTitleId, wadName, updater, altDolType, altDolFile, altDolOffset);
+			String^ error = PackWad(0,0, regionOverrideEnabled, selectedRegion, forceVideo, verboseLog, ocarinaEnabled, forceLanguage, selectedLanguage, forceLoader, fixes, selectedLoader, bannerFilename, selectedDiscId, selectedTitleId, wadName, updater, altDolType, altDolFile, altDolOffset, selectedPartition);
 
 			if (!String::IsNullOrEmpty(error)) 
 			{
@@ -2354,11 +2441,11 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 
 		 String^ PackWad(int mode, int index, bool regionOverrideEnabled, char selectedRegion, bool forceVideo, bool verboseLog, bool ocarinaEnabled, bool forceLanguage, char selectedLanguage , bool forceLoader, int fixes, String^ selectedLoader, String^ bannerFilename, String^ selectedDiscId, String^ selectedTitleId, String^ wadName, FE100::StatusUpdater^ updater) 
 		 {
-			 return PackWad(mode, index, regionOverrideEnabled, selectedRegion, forceVideo, verboseLog, ocarinaEnabled, forceLanguage, selectedLanguage , forceLoader, fixes, selectedLoader, bannerFilename, selectedDiscId, selectedTitleId, wadName, updater, -1, String::Empty, 0);
+			 return PackWad(mode, index, regionOverrideEnabled, selectedRegion, forceVideo, verboseLog, ocarinaEnabled, forceLanguage, selectedLanguage , forceLoader, fixes, selectedLoader, bannerFilename, selectedDiscId, selectedTitleId, wadName, updater, -1, String::Empty, 0, -1);
 		 }
 
 
-		 String^ PackWad(int mode, int index, bool regionOverrideEnabled, char selectedRegion, bool forceVideo, bool verboseLog, bool ocarinaEnabled, bool forceLanguage, char selectedLanguage , bool forceLoader, int fixes, String^ selectedLoader, String^ bannerFilename, String^ selectedDiscId, String^ selectedTitleId, String^ wadName, FE100::StatusUpdater^ updater, int altDolType, String^ altDolFile, unsigned int altDolOffset) 
+		 String^ PackWad(int mode, int index, bool regionOverrideEnabled, char selectedRegion, bool forceVideo, bool verboseLog, bool ocarinaEnabled, bool forceLanguage, char selectedLanguage , bool forceLoader, int fixes, String^ selectedLoader, String^ bannerFilename, String^ selectedDiscId, String^ selectedTitleId, String^ wadName, FE100::StatusUpdater^ updater, int altDolType, String^ altDolFile, unsigned int altDolOffset, int selectedPartition) 
 		 {
 			System::IO::Directory::SetCurrentDirectory(baseDirectory);
 
@@ -2513,6 +2600,11 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 							{
 								fileContent[configPlace+12] = '1';
 							}
+						}
+
+						if (selectedPartition>=0) 
+						{
+							fileContent[configPlace+12] = selectedPartition.ToString()[0];
 						}
 
 						if (altDolType>=0) 
@@ -2772,9 +2864,25 @@ private: void SetSelectedLoader(bool isDiscLoader, int i, String^ loaderType) {
 						{
 							lblAltDolSupport->Text = guiLang->Translate("FEATURENOTRELATED");
 							lblError002Fix->Text =  guiLang->Translate("FEATURENOTRELATED");
+							panelOptions->Visible = true;
+							panelPartition->Visible = false;
 							//lblDefaultDiscId->Text = interfaceLang->Translate("N/A");
-						}
+						} 
+						else 
+						{
+							Setting &supportsPartition = cfg.lookup((char*)(void*)Marshal::StringToHGlobalAnsi(String::Concat(loaderType,".[",i , "].supportsPartitionSelection")));	
+							int sSupportsPartition = supportsPartition;
 
+							if (sSupportsPartition==1) 
+							{
+								panelPartition->Visible = true;
+								panelOptions->Visible = false;
+							} else 
+							{
+								panelOptions->Visible = true;
+								panelPartition->Visible = false;
+							}
+						}
 					}
 }
 private: System::Void cmbLoaders_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -3378,7 +3486,8 @@ private: void loadMLResources() {
 			this->englishToolStripMenuItem->Text = guiLang->Translate("MENU_LANG_ENGLISH");
 			this->turToolStripMenuItem->Text = guiLang->Translate("MENU_LANG_TURKISH");
 			this->germanToolStripMenuItem->Text = guiLang->Translate("MENU_LANG_DEUTSCH");
-			this->frenchToolStripMenuItem->Text = guiLang->Translate("MENU_LANG_FRENCH");
+			this->frenchToolStripMenuItem->Text = guiLang->Translate("MENU_LANG_FRENCH") + "-2";
+			this->toolStripMenuItem1->Text = guiLang->Translate("MENU_LANG_FRENCH") + "-1";			
 			this->spanishToolStripMenuItem->Text = guiLang->Translate("MENU_LANG_SPANISH");
 			this->ýtalianToolStripMenuItem->Text = guiLang->Translate("MENU_LANG_ITALIAN");
 			this->portoqueseToolStripMenuItem->Text = guiLang->Translate("MENU_LANG_PORTOQUESE");
@@ -3402,6 +3511,7 @@ private: void loadMLResources() {
 			this->button4->Text = guiLang->Translate("HIDEWBFS");
 			this->openChannelWADToolStripMenuItem->Text = guiLang->Translate("OPENCHANNELWAD");
 			this->openFileDialog2->Filter = guiLang->Translate("WADFILESFILTER");
+			this->label25->Text = guiLang->Translate("PARTITION_SELECTION") + " :";
 		 }
 
 private: System::Void btnCreateSelected_Click_1(System::Object^  sender, System::EventArgs^  e) {
@@ -3553,7 +3663,7 @@ private: System::Void germanToolStripMenuItem_Click(System::Object^  sender, Sys
 	changeLanguage("Deutsch");
 		 }
 private: System::Void frenchToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	changeLanguage("French");
+	changeLanguage("French-2");
 		 }
 private: System::Void spanishToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	changeLanguage("Spanish");
@@ -3742,6 +3852,11 @@ private: System::Void openChannelWADToolStripMenuItem_Click(System::Object^  sen
 		 }
 private: System::Void danishToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 		changeLanguage("Danish");
+		 }
+private: System::Void label25_Click(System::Object^  sender, System::EventArgs^  e) {
+		 }
+private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
+		changeLanguage("French-1");
 		 }
 };
 
