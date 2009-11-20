@@ -120,7 +120,7 @@ void Determine_VideoMode(char Region, bool override)
         }
 	}
 }
-void Set_VideoMode(void)
+void Set_VideoMode(bool enableDisplay)
 {
     // TODO: Some exception handling is needed here
  
@@ -131,7 +131,13 @@ void Set_VideoMode(void)
 
     VIDEO_Configure(vmode);
     VIDEO_SetNextFramebuffer(xfb);
-    VIDEO_SetBlack(false);
+	if (enableDisplay) 
+	{
+		VIDEO_SetBlack(false);
+	} else 
+	{
+		VIDEO_SetBlack(true);		
+	}
     VIDEO_Flush();
     VIDEO_WaitVSync();
     if(vmode->viTVMode&VI_NON_INTERLACE) VIDEO_WaitVSync();
@@ -166,7 +172,7 @@ void Reboot()
 {
   exit(0);
 }
-void init_video(void)
+void init_video(bool enableDisplay)
 {
     // Initialize subsystems
     VIDEO_Init();
@@ -177,7 +183,12 @@ void init_video(void)
 
     VIDEO_Configure(vmode);
     VIDEO_SetNextFramebuffer(xfb);
-    VIDEO_SetBlack(false);
+	if (enableDisplay) 
+	{
+		VIDEO_SetBlack(false);
+	} else {
+		VIDEO_SetBlack(true);		
+	}
     VIDEO_Flush();
     VIDEO_WaitVSync();
 
@@ -199,7 +210,7 @@ void init_video(void)
 void SetTime(void)
 {
 	/* Extern */
-	extern void settime(long long);
+	extern void settime(u64);
 
 	/* Set proper time */
 	settime(secs_to_ticks(time(NULL) - 946684800));
@@ -210,8 +221,10 @@ int main(int argc, char **argv) {
 //---------------------------------------------------------------------------------
         char discid[7];
 	  int fix;
-	  strcpy(discid, "LOADER");
-	  strcpy(config, "CFGYAL00P0000000");
+	  //strcpy(discid, "LOADER");
+	  strcpy(discid, "SBLE5G");
+	  //strcpy(config, "CFGYAL00P0000000");
+	  strcpy(config, "CFGYAL10P0000000");
 	  
 	    if (config[6]=='1') 
 	    {
@@ -224,7 +237,7 @@ int main(int argc, char **argv) {
         int cios = CIOS;
         SYS_SetResetCallback(Reboot);
         debug_printf("start %s",argv[0]);
-        init_video();
+        init_video(debugEnabled);
         if (debugEnabled) printf("YAL v0.1 by Kwiirk (modded by WiiCrazy :p )\n");
         //if(usb_isgeckoalive(1))
         //        cios++;
@@ -410,7 +423,7 @@ int load_disc(char *discid, int fix)
 	    SetTime();
 
         // Set Video Mode based on Configuration
-        Set_VideoMode();
+        Set_VideoMode(debugEnabled);
 
 
 	if(fix){

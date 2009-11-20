@@ -55,7 +55,9 @@
     <Item key="CANTGETBLOCKEDGAMES">Bloke edilen oyunların listesi çekilemedi!\n Güvenliğiniz için bu program bloke edilmiş oyun listesi kullanmadan çalışmaz!\n Crap.config dosyasını kontrol edin!\n\nProgram kapatılıyor!</Item>
     <Item key="WONTWORKWITHOUTBLOCKEDGAMEINFO">Güvenliğiniz için bu program bloke edilmiş oyun listesi kullanmadan çalışmaz!\n Crap.config dosyasını kontrol edin!\n\nProgram kapatılıyor!</Item>
     <Item key="SELECT_PARTITION">Lütfen oyunun bulunduğu disk bölümünü seçin!</Item>
-
+    <Item key="CREATING_COMMONKEY">Programı ilk defa çalıştırdığınız için common key dosyası WiiHackingHistory.txt dosyası kullanılarak oluşturuluyor.</Item>
+    <Item key="COMMONKEY_CREATION_SUCCESSFUL">Common key dosyası başarıyla oluşturuldu!</Item>
+    <Item key="ERRORCREATING_COMMONKEY">Common key dosyası yaratılırken hata oluştu!\n Lütfen dosyayı edinip shared klasörüne common-key ismiyle manuel olarak koyun.</Item>
   </Module>
   <Module key="GUIStatic">
     <Item key="BANNERLABEL">Banner</Item>
