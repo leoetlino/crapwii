@@ -58,7 +58,10 @@
     <Item key="SELECT_PARTITION">Please select the partition.</Item>
     <Item key="CREATING_COMMONKEY">Since this is the first time you run this program creating common key from stego text WiiHackingHistory.txt</Item>
     <Item key="COMMONKEY_CREATION_SUCCESSFUL">Common key created successfully!</Item>
-    <Item key="ERRORCREATING_COMMONKEY">Common key creation somehow failed!\nPlease find it and put it into shared folder with name common-key</Item>           
+    <Item key="ERRORCREATING_COMMONKEY">Common key creation somehow failed!\nPlease find it and put it into shared folder with name common-key</Item>
+    <Item key="WBFS_BANNER_EXTRACTERROR">Can't extract the banner from Wbfs File! Check if you have wbfs_file.exe under 3rdParty folder!</Item>
+    <Item key="WBFS_BANNER_EXTRACTSYSTEMERROR">Error ocurred during banner extraction from Wbfs File,\n check file access restrictions!\n Actual error is : {0}</Item>
+
   </Module>
 	<Module key="GUIStatic">
     <Item key="BANNERLABEL">Banner</Item>
@@ -110,10 +113,10 @@
     <Item key="FIX_002_OLDSTYLE">Oldstyle 002</Item>
     <Item key="FIX_002_NEWSTYLE">Newstyle 002</Item>
     <Item key="FIX_ANTI_002">Anti 002</Item>
-    <Item key="ISO_LABEL">ISO</Item>
+    <Item key="ISO_LABEL">ISO/WBFS File</Item>
     <Item key="ALT_DOL_LIST">Alt. Dol List</Item>
     <Item key="SECTIONFIXES">Fixes</Item>
-    <Item key="ISOFILESFILTER">ISO files|*.iso</Item>
+    <Item key="ISOFILESFILTER">ISO files|*.iso|WBFS Files|*.wbfs</Item>
     <Item key="ALT_DOL_TYPE_NONE">Don't use Alt-dol</Item>
     <Item key="ALT_DOL_FROM_NAND">Alt dol from NAND</Item>
     <Item key="ALT_DOL_FROM_SD">Alt dol from SD</Item>

@@ -58,6 +58,8 @@
     <Item key="CREATING_COMMONKEY">Programı ilk defa çalıştırdığınız için common key dosyası WiiHackingHistory.txt dosyası kullanılarak oluşturuluyor.</Item>
     <Item key="COMMONKEY_CREATION_SUCCESSFUL">Common key dosyası başarıyla oluşturuldu!</Item>
     <Item key="ERRORCREATING_COMMONKEY">Common key dosyası yaratılırken hata oluştu!\n Lütfen dosyayı edinip shared klasörüne common-key ismiyle manuel olarak koyun.</Item>
+    <Item key="WBFS_BANNER_EXTRACTERROR">Banner wbfs dosyasından çıkarılamadı!! wbfs_file.exe dosyasının 3rdParty klasöründe olduğunu kontrol edin!</Item>
+    <Item key="WBFS_BANNER_EXTRACTSYSTEMERROR">Banner wbfs dosyasından çıkarılırken hata ile karşılaşıldı,\n Dosya erişim haklarını kontrol edin!\n Esas hata : {0}</Item>
   </Module>
   <Module key="GUIStatic">
     <Item key="BANNERLABEL">Banner</Item>
@@ -109,10 +111,10 @@
     <Item key="FIX_002_OLDSTYLE">Eski tip 002</Item>
     <Item key="FIX_002_NEWSTYLE">Yeni tip 002</Item>
     <Item key="FIX_ANTI_002">Anti 002</Item>
-    <Item key="ISO_LABEL">ISO</Item>
+    <Item key="ISO_LABEL">ISO/WBFS Dosyası</Item>
     <Item key="ALT_DOL_LIST">Alt. Dol Listesi</Item>
     <Item key="SECTIONFIXES">Fix'ler</Item>
-    <Item key="ISOFILESFILTER">ISO dosyaları|*.iso</Item>
+    <Item key="ISOFILESFILTER">ISO dosyaları|*.iso|WBFS Dosyaları|*.wbfs</Item>
     <Item key="ALT_DOL_TYPE_NONE">Alt. dol kullanma</Item>
     <Item key="ALT_DOL_FROM_NAND">NAND'dan Alt. dol </Item>
     <Item key="ALT_DOL_FROM_SD">SD'den Alt. dol</Item>

@@ -27,6 +27,7 @@ namespace FE100 {
 	using namespace libconfig;
 	using namespace WBFSSync;
 	using namespace System::Configuration;
+	using namespace System::Diagnostics;
 	using namespace Org::Irduco::MultiLanguage;
 	using namespace Org::Irduco::UpdateManager;
 	using namespace Org::Irduco::Text;
@@ -201,6 +202,7 @@ namespace FE100 {
 	private: MultiLanguageModuleHelper^ settingsLang;
 	private: Org::Irduco::UpdateManager::BlockedGamesManager^ blockedGamesManager;
 	private: bool programModeChannel;
+
 			 
 
 
@@ -487,6 +489,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->turToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->germanToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->frenchToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->spanishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ýtalianToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -511,7 +514,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->panelPartition = (gcnew System::Windows::Forms::Panel());
 			this->label25 = (gcnew System::Windows::Forms::Label());
 			this->cmbPartition = (gcnew System::Windows::Forms::ComboBox());
-			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->panelWBFS->SuspendLayout();
@@ -526,14 +528,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// txtDataFile
 			// 
 			this->txtDataFile->Enabled = false;
-			this->txtDataFile->Location = System::Drawing::Point(84, 18);
+			this->txtDataFile->Location = System::Drawing::Point(102, 18);
 			this->txtDataFile->Name = L"txtDataFile";
 			this->txtDataFile->Size = System::Drawing::Size(222, 20);
 			this->txtDataFile->TabIndex = 0;
 			// 
 			// lblFileName
 			// 
-			this->lblFileName->Location = System::Drawing::Point(6, 21);
+			this->lblFileName->Location = System::Drawing::Point(25, 21);
 			this->lblFileName->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->lblFileName->Name = L"lblFileName";
 			this->lblFileName->Size = System::Drawing::Size(74, 13);
@@ -543,7 +545,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			// btnBrowse
 			// 
-			this->btnBrowse->Location = System::Drawing::Point(312, 17);
+			this->btnBrowse->Location = System::Drawing::Point(330, 17);
 			this->btnBrowse->Name = L"btnBrowse";
 			this->btnBrowse->Size = System::Drawing::Size(33, 22);
 			this->btnBrowse->TabIndex = 4;
@@ -656,7 +658,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label5->Location = System::Drawing::Point(349, 171);
+			this->label5->Location = System::Drawing::Point(358, 171);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(155, 13);
 			this->label5->TabIndex = 24;
@@ -667,7 +669,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label6->Location = System::Drawing::Point(349, 190);
+			this->label6->Location = System::Drawing::Point(358, 190);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(154, 13);
 			this->label6->TabIndex = 25;
@@ -679,7 +681,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label7->Location = System::Drawing::Point(349, 248);
+			this->label7->Location = System::Drawing::Point(358, 248);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(154, 13);
 			this->label7->TabIndex = 26;
@@ -690,7 +692,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label8->Location = System::Drawing::Point(349, 208);
+			this->label8->Location = System::Drawing::Point(358, 208);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(155, 13);
 			this->label8->TabIndex = 27;
@@ -701,7 +703,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label9->Location = System::Drawing::Point(349, 228);
+			this->label9->Location = System::Drawing::Point(358, 228);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(155, 13);
 			this->label9->TabIndex = 28;
@@ -711,7 +713,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblAuthor
 			// 
 			this->lblAuthor->AutoSize = true;
-			this->lblAuthor->Location = System::Drawing::Point(513, 171);
+			this->lblAuthor->Location = System::Drawing::Point(522, 171);
 			this->lblAuthor->Name = L"lblAuthor";
 			this->lblAuthor->Size = System::Drawing::Size(0, 13);
 			this->lblAuthor->TabIndex = 29;
@@ -719,7 +721,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblModder
 			// 
 			this->lblModder->AutoSize = true;
-			this->lblModder->Location = System::Drawing::Point(513, 190);
+			this->lblModder->Location = System::Drawing::Point(522, 190);
 			this->lblModder->Name = L"lblModder";
 			this->lblModder->Size = System::Drawing::Size(0, 13);
 			this->lblModder->TabIndex = 31;
@@ -727,7 +729,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblRegionOverride
 			// 
 			this->lblRegionOverride->AutoSize = true;
-			this->lblRegionOverride->Location = System::Drawing::Point(513, 248);
+			this->lblRegionOverride->Location = System::Drawing::Point(522, 248);
 			this->lblRegionOverride->Name = L"lblRegionOverride";
 			this->lblRegionOverride->Size = System::Drawing::Size(0, 13);
 			this->lblRegionOverride->TabIndex = 32;
@@ -735,7 +737,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblDefaultDiscId
 			// 
 			this->lblDefaultDiscId->AutoSize = true;
-			this->lblDefaultDiscId->Location = System::Drawing::Point(514, 208);
+			this->lblDefaultDiscId->Location = System::Drawing::Point(523, 208);
 			this->lblDefaultDiscId->Name = L"lblDefaultDiscId";
 			this->lblDefaultDiscId->Size = System::Drawing::Size(0, 13);
 			this->lblDefaultDiscId->TabIndex = 34;
@@ -743,7 +745,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblConfigPlaceholder
 			// 
 			this->lblConfigPlaceholder->AutoSize = true;
-			this->lblConfigPlaceholder->Location = System::Drawing::Point(514, 228);
+			this->lblConfigPlaceholder->Location = System::Drawing::Point(523, 228);
 			this->lblConfigPlaceholder->Name = L"lblConfigPlaceholder";
 			this->lblConfigPlaceholder->Size = System::Drawing::Size(0, 13);
 			this->lblConfigPlaceholder->TabIndex = 35;
@@ -752,7 +754,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label10->Location = System::Drawing::Point(349, 153);
+			this->label10->Location = System::Drawing::Point(358, 153);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(154, 13);
 			this->label10->TabIndex = 36;
@@ -762,7 +764,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblDolFilename
 			// 
 			this->lblDolFilename->AutoSize = true;
-			this->lblDolFilename->Location = System::Drawing::Point(513, 153);
+			this->lblDolFilename->Location = System::Drawing::Point(522, 153);
 			this->lblDolFilename->Name = L"lblDolFilename";
 			this->lblDolFilename->Size = System::Drawing::Size(0, 13);
 			this->lblDolFilename->TabIndex = 37;
@@ -771,7 +773,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label11->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label11->Location = System::Drawing::Point(349, 268);
+			this->label11->Location = System::Drawing::Point(358, 268);
 			this->label11->Name = L"label11";
 			this->label11->Size = System::Drawing::Size(154, 13);
 			this->label11->TabIndex = 38;
@@ -781,7 +783,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblVerboseLog
 			// 
 			this->lblVerboseLog->AutoSize = true;
-			this->lblVerboseLog->Location = System::Drawing::Point(514, 268);
+			this->lblVerboseLog->Location = System::Drawing::Point(523, 268);
 			this->lblVerboseLog->Name = L"lblVerboseLog";
 			this->lblVerboseLog->Size = System::Drawing::Size(0, 13);
 			this->lblVerboseLog->TabIndex = 39;
@@ -832,7 +834,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label13->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label13->Location = System::Drawing::Point(352, 288);
+			this->label13->Location = System::Drawing::Point(361, 288);
 			this->label13->Name = L"label13";
 			this->label13->Size = System::Drawing::Size(151, 13);
 			this->label13->TabIndex = 45;
@@ -843,7 +845,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label14->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label14->Location = System::Drawing::Point(346, 309);
+			this->label14->Location = System::Drawing::Point(355, 309);
 			this->label14->Name = L"label14";
 			this->label14->Size = System::Drawing::Size(157, 13);
 			this->label14->TabIndex = 46;
@@ -854,7 +856,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label15->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label15->Location = System::Drawing::Point(349, 329);
+			this->label15->Location = System::Drawing::Point(358, 329);
 			this->label15->Name = L"label15";
 			this->label15->Size = System::Drawing::Size(154, 13);
 			this->label15->TabIndex = 47;
@@ -864,7 +866,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblForceVideoModeSupport
 			// 
 			this->lblForceVideoModeSupport->AutoSize = true;
-			this->lblForceVideoModeSupport->Location = System::Drawing::Point(514, 309);
+			this->lblForceVideoModeSupport->Location = System::Drawing::Point(523, 309);
 			this->lblForceVideoModeSupport->Name = L"lblForceVideoModeSupport";
 			this->lblForceVideoModeSupport->Size = System::Drawing::Size(0, 13);
 			this->lblForceVideoModeSupport->TabIndex = 48;
@@ -872,7 +874,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblOcarinaSupport
 			// 
 			this->lblOcarinaSupport->AutoSize = true;
-			this->lblOcarinaSupport->Location = System::Drawing::Point(514, 288);
+			this->lblOcarinaSupport->Location = System::Drawing::Point(523, 288);
 			this->lblOcarinaSupport->Name = L"lblOcarinaSupport";
 			this->lblOcarinaSupport->Size = System::Drawing::Size(0, 13);
 			this->lblOcarinaSupport->TabIndex = 49;
@@ -880,7 +882,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblForceLanguageSupport
 			// 
 			this->lblForceLanguageSupport->AutoSize = true;
-			this->lblForceLanguageSupport->Location = System::Drawing::Point(514, 329);
+			this->lblForceLanguageSupport->Location = System::Drawing::Point(523, 329);
 			this->lblForceLanguageSupport->Name = L"lblForceLanguageSupport";
 			this->lblForceLanguageSupport->Size = System::Drawing::Size(0, 13);
 			this->lblForceLanguageSupport->TabIndex = 50;
@@ -900,7 +902,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label16->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label16->Location = System::Drawing::Point(349, 350);
+			this->label16->Location = System::Drawing::Point(358, 350);
 			this->label16->Name = L"label16";
 			this->label16->Size = System::Drawing::Size(154, 13);
 			this->label16->TabIndex = 52;
@@ -910,7 +912,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblSdCardSupport
 			// 
 			this->lblSdCardSupport->AutoSize = true;
-			this->lblSdCardSupport->Location = System::Drawing::Point(514, 350);
+			this->lblSdCardSupport->Location = System::Drawing::Point(523, 350);
 			this->lblSdCardSupport->Name = L"lblSdCardSupport";
 			this->lblSdCardSupport->Size = System::Drawing::Size(0, 13);
 			this->lblSdCardSupport->TabIndex = 53;
@@ -1034,7 +1036,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(349, 126);
+			this->label2->Location = System::Drawing::Point(358, 126);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(251, 13);
 			this->label2->TabIndex = 63;
@@ -1054,7 +1056,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblError002Fix
 			// 
 			this->lblError002Fix->AutoSize = true;
-			this->lblError002Fix->Location = System::Drawing::Point(514, 370);
+			this->lblError002Fix->Location = System::Drawing::Point(523, 370);
 			this->lblError002Fix->Name = L"lblError002Fix";
 			this->lblError002Fix->Size = System::Drawing::Size(0, 13);
 			this->lblError002Fix->TabIndex = 66;
@@ -1063,7 +1065,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label18->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label18->Location = System::Drawing::Point(352, 370);
+			this->label18->Location = System::Drawing::Point(361, 370);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(151, 13);
 			this->label18->TabIndex = 50;
@@ -1095,14 +1097,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// txtIsoFile
 			// 
 			this->txtIsoFile->Enabled = false;
-			this->txtIsoFile->Location = System::Drawing::Point(84, 46);
+			this->txtIsoFile->Location = System::Drawing::Point(102, 46);
 			this->txtIsoFile->Name = L"txtIsoFile";
 			this->txtIsoFile->Size = System::Drawing::Size(222, 20);
 			this->txtIsoFile->TabIndex = 69;
 			// 
 			// btnSelectIso
 			// 
-			this->btnSelectIso->Location = System::Drawing::Point(312, 44);
+			this->btnSelectIso->Location = System::Drawing::Point(330, 44);
 			this->btnSelectIso->Name = L"btnSelectIso";
 			this->btnSelectIso->Size = System::Drawing::Size(33, 23);
 			this->btnSelectIso->TabIndex = 70;
@@ -1112,11 +1114,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			// label19
 			// 
-			this->label19->Location = System::Drawing::Point(43, 49);
+			this->label19->Location = System::Drawing::Point(3, 49);
 			this->label19->Name = L"label19";
-			this->label19->Size = System::Drawing::Size(37, 13);
+			this->label19->Size = System::Drawing::Size(96, 13);
 			this->label19->TabIndex = 71;
-			this->label19->Text = L"ISO :";
+			this->label19->Text = L"ISO/WBFS File :";
 			this->label19->TextAlign = System::Drawing::ContentAlignment::TopRight;
 			// 
 			// cmbDolList
@@ -1159,7 +1161,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			this->label21->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(162)));
-			this->label21->Location = System::Drawing::Point(352, 390);
+			this->label21->Location = System::Drawing::Point(361, 390);
 			this->label21->Name = L"label21";
 			this->label21->Size = System::Drawing::Size(151, 13);
 			this->label21->TabIndex = 77;
@@ -1169,7 +1171,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// lblAltDolSupport
 			// 
 			this->lblAltDolSupport->AutoSize = true;
-			this->lblAltDolSupport->Location = System::Drawing::Point(514, 390);
+			this->lblAltDolSupport->Location = System::Drawing::Point(523, 390);
 			this->lblAltDolSupport->Name = L"lblAltDolSupport";
 			this->lblAltDolSupport->Size = System::Drawing::Size(0, 13);
 			this->lblAltDolSupport->TabIndex = 78;
@@ -1196,7 +1198,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(419, 44);
+			this->button1->Location = System::Drawing::Point(446, 44);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(221, 23);
 			this->button1->TabIndex = 81;
@@ -1213,7 +1215,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->panelWBFS->Controls->Add(this->btnRefresh);
 			this->panelWBFS->Controls->Add(this->button3);
 			this->panelWBFS->Controls->Add(this->label23);
-			this->panelWBFS->Location = System::Drawing::Point(324, 126);
+			this->panelWBFS->Location = System::Drawing::Point(323, 126);
 			this->panelWBFS->Name = L"panelWBFS";
 			this->panelWBFS->Size = System::Drawing::Size(483, 380);
 			this->panelWBFS->TabIndex = 82;
@@ -1336,16 +1338,16 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->groupBox4->Controls->Add(this->label19);
 			this->groupBox4->Controls->Add(this->txtIsoFile);
 			this->groupBox4->Controls->Add(this->btnSelectIso);
-			this->groupBox4->Location = System::Drawing::Point(12, 26);
+			this->groupBox4->Location = System::Drawing::Point(8, 26);
 			this->groupBox4->Name = L"groupBox4";
-			this->groupBox4->Size = System::Drawing::Size(795, 75);
+			this->groupBox4->Size = System::Drawing::Size(798, 75);
 			this->groupBox4->TabIndex = 83;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Source";
 			// 
 			// label24
 			// 
-			this->label24->Location = System::Drawing::Point(351, 22);
+			this->label24->Location = System::Drawing::Point(378, 22);
 			this->label24->Name = L"label24";
 			this->label24->Size = System::Drawing::Size(62, 16);
 			this->label24->TabIndex = 84;
@@ -1354,7 +1356,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// 
 			// btnChannelSelect
 			// 
-			this->btnChannelSelect->Location = System::Drawing::Point(597, 18);
+			this->btnChannelSelect->Location = System::Drawing::Point(624, 18);
 			this->btnChannelSelect->Name = L"btnChannelSelect";
 			this->btnChannelSelect->Size = System::Drawing::Size(43, 23);
 			this->btnChannelSelect->TabIndex = 83;
@@ -1365,7 +1367,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// txtChannel
 			// 
 			this->txtChannel->Enabled = false;
-			this->txtChannel->Location = System::Drawing::Point(419, 19);
+			this->txtChannel->Location = System::Drawing::Point(446, 19);
 			this->txtChannel->Name = L"txtChannel";
 			this->txtChannel->Size = System::Drawing::Size(172, 20);
 			this->txtChannel->TabIndex = 82;
@@ -1378,7 +1380,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
-			this->menuStrip1->Size = System::Drawing::Size(813, 24);
+			this->menuStrip1->Size = System::Drawing::Size(818, 24);
 			this->menuStrip1->TabIndex = 84;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -1440,112 +1442,119 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			// englishToolStripMenuItem
 			// 
 			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
-			this->englishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->englishToolStripMenuItem->Text = L"English";
 			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::englishToolStripMenuItem_Click);
 			// 
 			// turToolStripMenuItem
 			// 
 			this->turToolStripMenuItem->Name = L"turToolStripMenuItem";
-			this->turToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->turToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->turToolStripMenuItem->Text = L"Turkish";
 			this->turToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::turToolStripMenuItem_Click);
 			// 
 			// germanToolStripMenuItem
 			// 
 			this->germanToolStripMenuItem->Name = L"germanToolStripMenuItem";
-			this->germanToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->germanToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->germanToolStripMenuItem->Text = L"Deutsch";
 			this->germanToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::germanToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem1
+			// 
+			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
+			this->toolStripMenuItem1->Size = System::Drawing::Size(140, 22);
+			this->toolStripMenuItem1->Text = L"French-1";
+			this->toolStripMenuItem1->Click += gcnew System::EventHandler(this, &Form1::toolStripMenuItem1_Click);
 			// 
 			// frenchToolStripMenuItem
 			// 
 			this->frenchToolStripMenuItem->Name = L"frenchToolStripMenuItem";
-			this->frenchToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->frenchToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->frenchToolStripMenuItem->Text = L"French-2";
 			this->frenchToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::frenchToolStripMenuItem_Click);
 			// 
 			// spanishToolStripMenuItem
 			// 
 			this->spanishToolStripMenuItem->Name = L"spanishToolStripMenuItem";
-			this->spanishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->spanishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->spanishToolStripMenuItem->Text = L"Spanish";
 			this->spanishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::spanishToolStripMenuItem_Click);
 			// 
 			// ýtalianToolStripMenuItem
 			// 
 			this->ýtalianToolStripMenuItem->Name = L"ýtalianToolStripMenuItem";
-			this->ýtalianToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->ýtalianToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->ýtalianToolStripMenuItem->Text = L"Italian";
 			this->ýtalianToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::ýtalianToolStripMenuItem_Click);
 			// 
 			// portoqueseToolStripMenuItem
 			// 
 			this->portoqueseToolStripMenuItem->Name = L"portoqueseToolStripMenuItem";
-			this->portoqueseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->portoqueseToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->portoqueseToolStripMenuItem->Text = L"Portoquese";
 			this->portoqueseToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::portoqueseToolStripMenuItem_Click);
 			// 
 			// japaneseToolStripMenuItem
 			// 
 			this->japaneseToolStripMenuItem->Name = L"japaneseToolStripMenuItem";
-			this->japaneseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->japaneseToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->japaneseToolStripMenuItem->Text = L"Japanese";
 			this->japaneseToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::japaneseToolStripMenuItem_Click);
 			// 
 			// sChineseToolStripMenuItem
 			// 
 			this->sChineseToolStripMenuItem->Name = L"sChineseToolStripMenuItem";
-			this->sChineseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->sChineseToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->sChineseToolStripMenuItem->Text = L"S.Chinese";
 			this->sChineseToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::sChineseToolStripMenuItem_Click);
 			// 
 			// tChineseToolStripMenuItem
 			// 
 			this->tChineseToolStripMenuItem->Name = L"tChineseToolStripMenuItem";
-			this->tChineseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->tChineseToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->tChineseToolStripMenuItem->Text = L"T.Chinese";
 			this->tChineseToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::tChineseToolStripMenuItem_Click);
 			// 
 			// koreanToolStripMenuItem
 			// 
 			this->koreanToolStripMenuItem->Name = L"koreanToolStripMenuItem";
-			this->koreanToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->koreanToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->koreanToolStripMenuItem->Text = L"Korean";
 			this->koreanToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::koreanToolStripMenuItem_Click);
 			// 
 			// russianToolStripMenuItem
 			// 
 			this->russianToolStripMenuItem->Name = L"russianToolStripMenuItem";
-			this->russianToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->russianToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->russianToolStripMenuItem->Text = L"Russian";
 			this->russianToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::russianToolStripMenuItem_Click);
 			// 
 			// dutchToolStripMenuItem
 			// 
 			this->dutchToolStripMenuItem->Name = L"dutchToolStripMenuItem";
-			this->dutchToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->dutchToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->dutchToolStripMenuItem->Text = L"Dutch";
 			this->dutchToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::dutchToolStripMenuItem_Click);
 			// 
 			// finnishToolStripMenuItem
 			// 
 			this->finnishToolStripMenuItem->Name = L"finnishToolStripMenuItem";
-			this->finnishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->finnishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->finnishToolStripMenuItem->Text = L"Finnish";
 			this->finnishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::finnishToolStripMenuItem_Click);
 			// 
 			// swedishToolStripMenuItem
 			// 
 			this->swedishToolStripMenuItem->Name = L"swedishToolStripMenuItem";
-			this->swedishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->swedishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->swedishToolStripMenuItem->Text = L"Swedish";
 			this->swedishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::swedishToolStripMenuItem_Click);
 			// 
 			// danishToolStripMenuItem
 			// 
 			this->danishToolStripMenuItem->Name = L"danishToolStripMenuItem";
-			this->danishToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->danishToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->danishToolStripMenuItem->Text = L"Danish";
 			this->danishToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::danishToolStripMenuItem_Click);
 			// 
@@ -1590,7 +1599,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->panelBatch->Controls->Add(this->listBox1);
 			this->panelBatch->Controls->Add(this->btnBatchCreate);
 			this->panelBatch->Controls->Add(this->btnDismiss);
-			this->panelBatch->Location = System::Drawing::Point(328, 126);
+			this->panelBatch->Location = System::Drawing::Point(337, 126);
 			this->panelBatch->Name = L"panelBatch";
 			this->panelBatch->Size = System::Drawing::Size(479, 375);
 			this->panelBatch->TabIndex = 85;
@@ -1653,20 +1662,13 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->cmbPartition->Size = System::Drawing::Size(168, 21);
 			this->cmbPartition->TabIndex = 0;
 			// 
-			// toolStripMenuItem1
-			// 
-			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
-			this->toolStripMenuItem1->Size = System::Drawing::Size(152, 22);
-			this->toolStripMenuItem1->Text = L"French-1";
-			this->toolStripMenuItem1->Click += gcnew System::EventHandler(this, &Form1::toolStripMenuItem1_Click);
-			// 
 			// Form1
 			// 
 			this->AllowDrop = true;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
-			this->ClientSize = System::Drawing::Size(813, 522);
+			this->ClientSize = System::Drawing::Size(818, 522);
 			this->Controls->Add(this->panelPartition);
 			this->Controls->Add(this->panelOptions);
 			this->Controls->Add(this->panelWBFS);
@@ -1715,7 +1717,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
-			this->Text = L"Crap 2.3b / By WiiCrazy (I.R.on) ";
+			this->Text = L"Crap 2.4b / By WiiCrazy (I.R.on) ";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Form1::Form1_DragDrop);
 			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Form1::Form1_DragEnter);
@@ -1883,6 +1885,7 @@ private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 				MessageBox::Show(interfaceLang->TranslateAndReplace("CANTGETBLOCKEDGAMES","\\n", "\n") + " : " + ex->Message,interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
 				this->Close();
 			}
+
 		 }
 
 
@@ -2402,9 +2405,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 				wadName = txtDiscId->Text;
 			} else if (radBtn2->Checked) 
 			{
-				wadName = lblGameName->Text;
-				wadName = wadName->Concat(" - ");
-				wadName = wadName->Concat(selectedDiscId);
+				wadName = lblGameName->Text + " - " + selectedDiscId;
 			} else if (radBtn3->Checked) 
 			{
 				wadName = lblGameName->Text + " - " + selectedTitleId + " - " + selectedDiscId;
@@ -3269,7 +3270,13 @@ private: void isoSelection()
             {
 				try {
 					txtIsoFile->Text = openFileDialog1->FileName;
-					parseIso();
+					if (Path::GetExtension(txtIsoFile->Text)->ToUpperInvariant()->EndsWith("ISO")) 
+					{
+						parseIso();
+					} else 
+					{
+						parseWbfsFile();
+					}
 				} catch(Exception^ ex) 
 				{
 					MessageBox::Show(String::Format(interfaceLang->Translate("ISOPARSEERROR"), ex->ToString()), interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -3280,6 +3287,62 @@ private: void isoSelection()
 private: System::Void btnGetStuff_Click(System::Object^  sender, System::EventArgs^  e) {
 			parseIso();
 		 }
+
+#define ERROR_FILE_NOT_FOUND 2
+#define ERROR_ACCESS_DENIED  5
+
+private: void parseWbfsFile() 
+{			
+	String^ wbfsFile = txtIsoFile->Text;
+	int pointPosition = wbfsFile->LastIndexOf(".");
+	String^ gameId = wbfsFile->Substring(pointPosition-6, 6);
+	String^ bannerFullPath = baseDirectory + "\\banners\\" + gameId+ ".bnr";
+
+	try 
+	{
+		if (parseWbfsFileInternal(wbfsFile, gameId)) 
+		{
+			//wbfs_file.exe creates opening.bnr in the game folder, we should move it to the banners folder under Crap
+
+			//Get full path of folder that contains the wbfs file (hence opening.bnr)
+			String^ openingBnrPath = Path::Combine(Path::GetDirectoryName(wbfsFile), "opening.bnr");
+			//Move this file to banner folder if it doesn't already exist.
+			if (!File::Exists(bannerFullPath)) 
+			{
+				File::Move(openingBnrPath, bannerFullPath);
+			}
+
+			handleBannerChange(bannerFullPath, "");
+		} else 
+		{
+			MessageBox::Show(interfaceLang->Translate("WBFS_BANNER_EXTRACTERROR"), interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+	}
+   catch ( Exception^ e ) 
+   {
+	   MessageBox::Show(String::Format(interfaceLang->TranslateAndReplace("WBFS_BANNER_EXTRACTSYSTEMERROR", "\\n","\n"), e->ToString()), interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
+   }
+
+}
+
+
+private: bool parseWbfsFileInternal(String^ wbfsFilePath, String^ gameId) 
+{
+	Process^ myProcess = gcnew Process;
+    myProcess->StartInfo->FileName = Path::Combine(Path::Combine(baseDirectory, "3rdParty"), "wbfs_file.exe");
+	myProcess->StartInfo->Arguments = String::Format(" \"{0}\" extract_file {1} opening.bnr", wbfsFilePath, gameId);
+    myProcess->StartInfo->CreateNoWindow = true;
+	myProcess->StartInfo->WindowStyle = ProcessWindowStyle::Hidden;
+    myProcess->Start();
+	myProcess->WaitForExit();
+	if (myProcess->ExitCode == 0) 
+	{
+		return true;
+	} else 
+	{
+	  return false;
+	}
+}
 
 private: void parseIso() 
 {				
@@ -3379,19 +3442,45 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 					 {
 						 device->Open(selectedDrive, false);
 						 int count = device->DiscCount;
+
+						 //System::Collections::Generic::SortedList^ list = gcnew System::Collections::Generic::SortedList;
+						 System::Collections::Generic::SortedList<String^, array<String^>^> list = gcnew System::Collections::Generic::SortedList<String^, array<String^>^>();
+
 						 for (int i=0;i<count;i++) 
 						 {
 							 IDisc^ disc = device->GetDiscByIndex(i);
-							 ListViewItem^ item = gcnew ListViewItem(i.ToString());
-							 listGames->Items->Add(item);
-							 listGames->Items[i]->SubItems->Add(disc->Code);
-							 listGames->Items[i]->SubItems->Add(disc->Name);
-							 listGames->Items[i]->SubItems->Add(sizeToGB(disc->WBFSSize));
-							 //Button^ button = gcnew Button();
-							 //button->Text = "Use";
-							 //button->Click+= gcnew System::EventHandler(this, &WBFSDrive::ButtonHandler);
-							 //listGames->Items[i]->SubItems->Add(new ListViewItem::ListViewSubItem(
+							 array<String^>^ info = gcnew array<String^>(4);
+							 info[0] = i.ToString();
+							 info[1] = disc->Code;
+							 info[2] = disc->Name;
+							 info[3] = sizeToGB(disc->WBFSSize);
+							 list.Add(disc->Name, info);
 						 }
+						
+						 int index = 0;
+						 for each (KeyValuePair<String^, array<String^>^> kvp in list) 
+						 {
+							 array<String^>^ info = (array<String^>^) kvp.Value;
+
+							 ListViewItem^ item = gcnew ListViewItem(info[0]);
+							 listGames->Items->Add(item);
+							 listGames->Items[index]->SubItems->Add(info[1]);
+							 listGames->Items[index]->SubItems->Add(info[2]);
+							 listGames->Items[index]->SubItems->Add(info[3]);
+							 index++;
+						 }
+						 //myList.GetKey(i), myList.GetByIndex(i) 
+
+						 //for (int i=0;i<count;i++) 
+						 //{
+							// IDisc^ disc = device->GetDiscByIndex(i);
+							// ListViewItem^ item = gcnew ListViewItem(i.ToString());
+							// listGames->Items->Add(item);
+							// listGames->Items[i]->SubItems->Add(disc->Code);
+							// listGames->Items[i]->SubItems->Add(disc->Name);
+							// listGames->Items[i]->SubItems->Add(sizeToGB(disc->WBFSSize));
+						 //}
+
 					 } else 
 					 {
 						 MessageBox::Show(interfaceLang->Translate("NOTAWBFSDRIVE"), interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -3893,6 +3982,7 @@ private: System::Void CreateCommonKey()
 				MessageBox::Show(interfaceLang->TranslateAndReplace("ERRORCREATING_COMMONKEY", "\\n", "\n") + " : " + ex->ToString(), interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
 		 }
+
 
 };
 
