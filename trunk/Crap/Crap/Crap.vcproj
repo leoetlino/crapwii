@@ -222,6 +222,10 @@
 			ReferencedProjectIdentifier="{666E5E63-9036-43E0-ABAE-084F12CB8FBE}"
 			RelativePathToProject=".\UpdateManager\UpdateManager.csproj"
 		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{5ACCBD83-3895-4E13-873D-4A7D102EF483}"
+			RelativePathToProject=".\WordStegoLib\WordStegoLib.csproj"
+		/>
 	</References>
 	<Files>
 		<Filter

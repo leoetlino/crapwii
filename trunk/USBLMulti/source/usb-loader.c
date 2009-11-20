@@ -18,18 +18,27 @@ char defaultConfig[64];
 int main(int argc, char **argv)
 {
 	/* SET DEFAULT CONFIG FOR CRAP */
+	/*
 	strcpy(defaultDiscId, "CRAPPY");
+	strcpy(defaultConfig,   "CFGUSB00000000000000000000000000000000000");
+	*/
+	
+	strcpy(defaultDiscId, "SMNP01");
+	strcpy(defaultConfig,   "CFGUSB10000000002000000000000000000000000");
+	
 	//strcpy(defaultDiscId, "R3MP01");	//Metroid Prime
 	//strcpy(defaultDiscId, "RVUP8P");	//Virtua tennis
 	//strcpy(defaultConfig, "CFGUSB0000000000");
 	//strcpy(defaultConfig, "CFGUSB1000000100002CE9E0U3MPrs5mp1_p.dol");
-	//strcpy(defaultConfig,   "CFGUSB1000000100002CE9E0U3MPrs5mp1_p.dol");
-	strcpy(defaultConfig,     "CFGUSB00000000100002CE9E0U3MPrs5mp1_p.dol");
+	//strcpy(defaultConfig, "CFGUSB1000000100002CE9E0U3MPrs5mp1_p.dol");
+	////strcpy(defaultConfig,     "CFGUSB00000000100002CE9E0U3MPrs5mp1_p.dol");	
 	//strcpy(defaultConfig, "CFGUSB1000000400002CE9E0UMPErs5mp1_p.dol");
 	//strcpy(defaultConfig, "CFGUSB1000000400003FE2F8UMPErs5mp1_p.dol");	
 	//strcpy(defaultConfig, "CFGUSB1000000200003FE2F8UMPErs5mp2_p.dol");
 	s32 ret;
-
+	
+	bool enableDisplay = (defaultConfig[VERBOSE_LOG]=='1');
+	
 	/* Load Custom IOS */
 	ret = IOS_ReloadIOS(249);
 
@@ -40,7 +49,8 @@ int main(int argc, char **argv)
 	Subsystem_Init();
 
 	/* Set video mode */
-	Video_SetMode();
+	Video_SetMode(enableDisplay);
+	
 
 	/* Initialize console */
 	Gui_InitConsole();

@@ -1,0 +1,3 @@
+SET WIILOAD=tcp:192.168.2.5
+C:\WIILOAD boot.dol
+PAUSE

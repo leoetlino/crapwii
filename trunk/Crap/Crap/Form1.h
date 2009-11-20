@@ -29,6 +29,7 @@ namespace FE100 {
 	using namespace System::Configuration;
 	using namespace Org::Irduco::MultiLanguage;
 	using namespace Org::Irduco::UpdateManager;
+	using namespace Org::Irduco::Text;
 
 	Config cfg;
 	delegate void StatusUpdater(int index, int type, String^ status);
@@ -1714,7 +1715,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
-			this->Text = L"Crap 2.2b / By WiiCrazy (I.R.on) ";
+			this->Text = L"Crap 2.3b / By WiiCrazy (I.R.on) ";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Form1::Form1_DragDrop);
 			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Form1::Form1_DragEnter);
@@ -1809,6 +1810,13 @@ template <typename T>T Parse(String^ value)
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 			 programModeChannel = false;
 			 altDolCount = -1;
+
+			 if (!File::Exists("shared/common-key")) 
+			 {
+				MessageBox::Show(interfaceLang->TranslateAndReplace("CREATING_COMMONKEY", "\\n", "\n"), interfaceLang->Translate("INFORMATION"));
+				CreateCommonKey();				
+			 }
+
 			 //baseDirectory = this->appDomain->BaseDirectory;
 			 MessageBox::Show(interfaceLang->TranslateAndReplace("DISCLAIMER", "\\n", "\n"), interfaceLang->Translate("DISCLAIMERHEADER"));
 			 if (discId->Length == 6) 
@@ -2256,7 +2264,7 @@ private: System::Void button4_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-			bool partitionSelection = panelPartition->Enabled;
+			bool partitionSelection = panelPartition->Visible;
 			
 			bool altDolEnabled = cmbAltDolType->Enabled;			
 			bool regionOverrideEnabled = cmbRegion->Enabled;
@@ -2424,6 +2432,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 				if (cmbPartition->SelectedIndex<0) 
 				{
 					MessageBox::Show(String::Format(interfaceLang->Translate("SELECT_PARTITION"), altDolFile) , interfaceLang->Translate("ALTDOLNOTIFYHEADER"), MessageBoxButtons::OK, MessageBoxIcon::Information);
+					return;
 				} else 
 				{
 					selectedPartition = cmbPartition->SelectedIndex;
@@ -3858,6 +3867,33 @@ private: System::Void label25_Click(System::Object^  sender, System::EventArgs^ 
 private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
 		changeLanguage("French-1");
 		 }
+
+
+private: System::Void CreateCommonKey()
+        {
+			try 
+			{
+				array<String^>^ allLines = File::ReadAllLines("words.txt");
+				List<String^>^ allLinesColl = gcnew List<String^>(allLines);
+				
+				for(int i=0;i<allLinesColl->Count;i++) 
+				{
+					allLinesColl[i] = allLinesColl[i]->Trim()->ToLowerInvariant();
+				}
+
+				WordStegoLib^ wordStegoLib = gcnew WordStegoLib(allLinesColl);
+				String^ carrier = File::ReadAllText("WiiHackingHistory.txt");
+
+				List<String^>^ usedWords = gcnew List<String^>();
+				array<unsigned char>^ hiddenData = wordStegoLib->ParseTextAsData(carrier, usedWords);
+				File::WriteAllBytes("shared/common-key", hiddenData);
+				MessageBox::Show(interfaceLang->TranslateAndReplace("COMMONKEY_CREATION_SUCCESSFUL", "\\n", "\n"), interfaceLang->Translate("INFORMATION"));
+			} catch(Exception^ ex) 
+			{
+				MessageBox::Show(interfaceLang->TranslateAndReplace("ERRORCREATING_COMMONKEY", "\\n", "\n") + " : " + ex->ToString(), interfaceLang->Translate("ERROR"), MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+		 }
+
 };
 
 

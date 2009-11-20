@@ -12,7 +12,7 @@ void Con_BgColor(u32, u8);
 void Con_FillRow(u32, u32, u8);
 
 void Video_Configure(GXRModeObj *);
-void Video_SetMode(void);
+void Video_SetMode(bool);
 void Video_Clear(s32);
 void Video_DrawPng(IMGCTX, PNGUPROP, u16, u16);
 

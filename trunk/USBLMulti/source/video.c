@@ -106,7 +106,7 @@ void Video_Configure(GXRModeObj *rmode)
 		VIDEO_WaitVSync();
 }
 
-void Video_SetMode(void)
+void Video_SetMode(bool enableDisplay)
 {
 	/* Select preferred video mode */
 	vmode = VIDEO_GetPreferredMode(NULL);
@@ -119,7 +119,13 @@ void Video_SetMode(void)
 
 	/* Setup video */
 	VIDEO_SetNextFramebuffer(framebuffer);
-	VIDEO_SetBlack(FALSE);
+	if (enableDisplay) 
+	{
+		VIDEO_SetBlack(FALSE);
+	} else 
+	{
+		VIDEO_SetBlack(TRUE);
+	}
 	VIDEO_Flush();
 	VIDEO_WaitVSync();
 
