@@ -53,6 +53,7 @@ misrepresented as being the original software.
 
 #include "dol.h"
 
+//#define DEBUG
 
 static void *xfb = NULL;
 static GXRModeObj *rmode = NULL;
@@ -79,14 +80,30 @@ void init()
 	VIDEO_SetNextFramebuffer(xfb);
 	
 	// Make the display invisible
-	VIDEO_SetBlack(TRUE);
+	#ifdef DEBUG
+	VIDEO_SetBlack(FALSE);	
+	#else
+	VIDEO_SetBlack(TRUE);	
+	#endif
 
 	// Flush the video register changes to the hardware
 	VIDEO_Flush();
 
 	// Wait for Video setup to complete
 	VIDEO_WaitVSync();
+
 	if(rmode->viTVMode&VI_NON_INTERLACE) VIDEO_WaitVSync();
+	
+	#ifdef DEBUG
+		// Set console parameters
+    int x = 20, y = 20, w, h;
+    w = rmode->fbWidth - (x * 2);
+    h = rmode->xfbHeight - (y + 20);
+
+    // Initialize the console - CON_InitEx works after VIDEO_ calls
+    CON_InitEx(rmode, x, y, w, h);
+	#endif
+
 }
 
 
@@ -134,6 +151,7 @@ retry:
 // define USB Loader
 //#define WIIFLOW
 #define CFGUL
+//#define USBLOADERGX
 
 // Configurable USB Loader
 #ifdef CFGUL 
@@ -142,7 +160,21 @@ retry:
 	char filenames[MAXFILES][FILENAMECHARACTERS] = 
 	{ 
 		{"fat:/apps/usbloader/boot.dol"},	
+		//{"fat:/apps/tester/boot.dol"},			
 		{"fat:/apps/usbloader_cfg/boot.dol"},
+		{"fat:/apps/usb_loader/boot.dol"},
+		{"fat:/apps/usb-loader/boot.dol"}	
+	};
+#endif
+
+// USB Loader GX
+#ifdef USBLOADERGX
+	#define MAXFILES 4
+	// add/change filenames here, don't forget to edit MAXFILES!
+	char filenames[MAXFILES][FILENAMECHARACTERS] = 
+	{ 
+		{"fat:/apps/usbloader_gx/boot.dol"},	
+		{"fat:/apps/usbloadergx/boot.dol"},	
 		{"fat:/apps/usb_loader/boot.dol"},
 		{"fat:/apps/usb-loader/boot.dol"}	
 	};
@@ -199,52 +231,97 @@ int main(int argc, char **argv)
 
 	// set default "not set"
 #define SELECTED_PARTITION 12	
-	char defaultConfig[64];
-	strcpy(defaultConfig, "CFGCNF00000000000000000000000000000000000");
-	
-	char cfgparam[50];
-	
-	strcpy(cfgparam, "#CRAPPY-X");
-	cfgparam[8] = defaultConfig[SELECTED_PARTITION];
-	
-	//strcpy(cfgparam, "#RSPE01-4");
+#define EXTRA_PARAMETERS 13
+#define VERBOSE_LOG 6
+	char defaultConfig[142];
+	//128 characters reserved for extra parameters to pass to the loader
+	#ifdef CFGUL	
+	#ifdef DEBUG
+	strcpy(defaultConfig, "CFGCNF0000000debug=1 partition=NTFS1");		
+	#else
+	strcpy(defaultConfig, "CFGCNF0000000PLACEHOLDER FOR EXTRA PARAMETERS PLACEHOLDER FOR EXTRA PARAMETERS PLACEHOLDER FOR EXTRA PARAMETERS PLACEHOLDER FOR EXTRA PARAMET");
+	#endif
+	#endif
 
+	#ifdef USBLOADERGX
+	#ifdef DEBUG
+	strcpy(defaultConfig, "CFGUGX0000000");	
+	#else
+	strcpy(defaultConfig, "CFGUGX0000000PLACEHOLDER FOR EXTRA PARAMETERS PLACEHOLDER FOR EXTRA PARAMETERS PLACEHOLDER FOR EXTRA PARAMETERS PLACEHOLDER FOR EXTRA PARAMET");
+	#endif
+	#endif		
+	
+	char cfgparam[12];
+	
+	#ifdef CFGUL
+	#ifdef DEBUG
+	strcpy(cfgparam, "SMNP01");		
+	#else
+	strcpy(cfgparam, "CRAPPY");
+	//cfgparam[8] = defaultConfig[SELECTED_PARTITION]; //Take it as an extra parameter
+	#endif	
+	#endif
 
-/*
-	// scan for pressed buttons
-	int countdown = 110; // needed because wiimote is not ready on first scan pads
-	while(countdown > 0)
+	#ifdef USBLOADERGX
+	#ifdef DEBUG
+	strcpy(cfgparam, "SMNP01");	
+	#else
+	strcpy(cfgparam, "CRAPPY");	
+	#endif
+	#endif
+	
+	//Let's break the arguments passed by Crap into an array and later set them into the argv array...
+	
+	#define MAXPARAMETERS 10
+	#define MAXPARAMETERSIZE 20
+	
+	char extraParameters[MAXPARAMETERS][MAXPARAMETERSIZE];
+	char *pExtraParameters = defaultConfig + EXTRA_PARAMETERS;
+	char *p;
+	int curExtraParameterCount = 0;
+	int extraParametersLength = 0;
+	
+	#ifdef CFGUL
+	sprintf(extraParameters[curExtraParameterCount], "intro=1"); //Make intro parameter the first extra parameter
+	#ifdef DEBUG
+	printf("\nAdding %s with length %d", extraParameters[curExtraParameterCount], strlen(extraParameters[curExtraParameterCount]));
+	#endif
+	
+	extraParametersLength = extraParametersLength + strlen(extraParameters[curExtraParameterCount]);
+	curExtraParameterCount++;	
+	
+	#endif
+	
+	//MAXPARAMETERS-1 more parameters can be specified in the configuration placeholder by the channel creator.
+	p = strtok(pExtraParameters, " ");
+
+	if (p!=NULL) 
 	{
-		WPAD_ScanPads();
-		u32 buttons = WPAD_ButtonsDown(0);
-		
-		VIDEO_WaitVSync();
-				
-		// 1 and 2 or A and B pressed: force ios=249
-		if(   ((buttons & WPAD_BUTTON_1) && (buttons & WPAD_BUTTON_2))
-           || ((buttons & WPAD_BUTTON_A) && (buttons & WPAD_BUTTON_B)))
-		{
-			sprintf(cfgparam, "ios=249");
-			break;
+		while ((p != NULL) && (curExtraParameterCount<MAXPARAMETERS))
+		{			
+			strcpy(extraParameters[curExtraParameterCount], p); //Copy a parameter to the array
+			p = strtok(NULL, " "); //next argument
+			
+			extraParametersLength = extraParametersLength + strlen(extraParameters[curExtraParameterCount]);			
+			#ifdef DEBUG			
+			printf("\nAdding %s with length %d", extraParameters[curExtraParameterCount], strlen(extraParameters[curExtraParameterCount]));
+			sleep(1);
+			#endif
+			curExtraParameterCount++; //increase count of arguments by one
 		}
+	}	
 
-		// 1 or A pressed: force ios=222-mload
-		if((buttons & WPAD_BUTTON_1) || (buttons & WPAD_BUTTON_A))
-		{
-			sprintf(cfgparam, "ios=222-mload");
-			break;
-		}
-		
-		// 2 or B pressed: force ios=223-mload
-		if((buttons & WPAD_BUTTON_2) || (buttons & WPAD_BUTTON_B))
-		{
-			sprintf(cfgparam, "ios=223-mload");
-			break;
-		}
-		
-		countdown--;
-	}
-*/
+	#ifdef DEBUG	
+	printf("\nTotal param length = %d", extraParametersLength);
+	sleep(5);
+	#endif
+
+	//TODO: Make Crap patch this so that we don't need to create two different loaders
+	//Requires gui changes at the moment so... 
+	//[20091204] gave up it will mess the Crap gui... it's better to define at least this parameter as default in the loader.. 
+	//user can define the extra parameters in a textbox in Crap.
+	//cfgparam[16] = defaultConfig[VERBOSE_LOG] == '0' ? '1' : '0';
+	
 
 	// build arguments for filename and cfgparam
 	// argv[0] = filename | argv[1] = cfgparam (could be: ios=222-mload, ios=223-mload or ios=249)
@@ -253,19 +330,54 @@ int main(int argc, char **argv)
 	bzero(&arg, sizeof(arg));
 	arg.argvMagic = ARGV_MAGIC;
 	
-	arg.length = strlen(filename) + 1 + strlen(cfgparam) + 2;
+	#ifdef DEBUG
+	printf("\nFilename length = %d", strlen(filename));
+	printf("\nCfgParam length = %d", strlen(cfgparam));
+	printf("\nExtra p  length = %d", extraParametersLength);	
+	printf("\nCount ext param = %d", curExtraParameterCount);	
+	printf("\nOverhead        = %d", 3);
+	#endif
+	
+	
+	arg.length = strlen(filename) + 1 + strlen(cfgparam) + 1 + extraParametersLength + curExtraParameterCount  + 1;
+	#ifdef DEBUG
+	printf("\nArgument length = %d", arg.length);
+	#endif
+	
 	arg.commandLine = malloc(arg.length);
-
+	
+	#ifdef USBLOADERGX
+	strcpy(arg.commandLine, filename);	
+	//arg.commandLine[0] = 'U';arg.commandLine[1] = 'S';arg.commandLine[2] = 'B';
+	#else
 	strcpy(arg.commandLine, filename);
+	#endif
+	
 	strcpy(&arg.commandLine[strlen(filename) + 1], cfgparam);
-	arg.commandLine[strlen(filename)] = '\x00';
+	
+	int position = strlen(filename) + strlen(cfgparam) + 2;
+	int i;
+	for (i=0;i<curExtraParameterCount;i++) 
+	{
+		strcpy(&arg.commandLine[position], extraParameters[i]);	
+		#ifdef DEBUG
+		printf("\nCopying %d into %d", i, position);
+		#endif
+		position = position + strlen(extraParameters[i]);
+		arg.commandLine[position] = '\x00';
+		position++;
+	}
+		
+	#ifdef DEBUG
+	printf("\nNulling position = %d", arg.length - 1);	
+	printf("\nNulling position = %d", arg.length - 2);		
+	#endif
 	arg.commandLine[arg.length - 1] = '\x00';
 	arg.commandLine[arg.length - 2] = '\x00';
 	
-	arg.argc = 2;
+	arg.argc = 2+curExtraParameterCount;
 	arg.argv = &arg.commandLine;
-	arg.endARGV = arg.argv + 2;
-
+	arg.endARGV = arg.argv + 2 + curExtraParameterCount;
 	// dol file on SD or USB found, read it!
 	int pos = ftell(dolFile);
 	fseek(dolFile, 0, SEEK_END);
